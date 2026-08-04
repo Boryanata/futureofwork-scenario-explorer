@@ -1,0 +1,10 @@
+.DS_Store
+**/.DS_Store
+
+# Generated/intermediate artifacts
+data/interim/pdf_text/
+data/interim/evidence_candidates.csv
+data/interim/evidence_candidates_priority.csv
+
+# Large raw files that should be replaced by curated processed extracts or Git LFS
+data/raw/anthropic/release-*/aei_*.csv
