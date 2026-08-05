@@ -1022,6 +1022,131 @@
       "notes": "Currently strongest as Singapore evidence; OECD principles implementation gives the broader policy frame."
     },
     {
+      "id": "rule_automation_first_high_exposure_risk",
+      "name": "Automation-first deployment raises risk in high-exposure occupations",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "ai_exposure",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "deployment_strategy",
+                "operator": "equals",
+                "value": "automation_first"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "displacement",
+        "secondary": [
+          "job_quality"
+        ],
+        "tendency": "increases_risk",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "substitution_centered_ai_work",
+      "narrative_template": "For high-exposure occupations, an automation-first strategy makes displacement and work-intensification risks more salient, even when institutions may buffer some transition effects.",
+      "evidence_ids": [
+        "oecd_ai_exposure_2026",
+        "ny_fed_retrainable_ai_workers",
+        "cuf_automation_nyc",
+        "algorithms_as_work_designers_2021"
+      ],
+      "notes": "Keeps organizational strategy visible when supportive institutions otherwise dominate the scenario."
+    },
+    {
+      "id": "rule_hybrid_adoption_uneven_outcomes",
+      "name": "Hybrid AI adoption produces uneven worker outcomes",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "deployment_strategy",
+                "operator": "equals",
+                "value": "hybrid"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "distribution_of_gains"
+        ],
+        "tendency": "mixed",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "uneven_hybrid_ai_work",
+      "narrative_template": "Mixed adoption can combine augmentation in some tasks with substitution, monitoring, or uneven access to training in others, making worker outcomes more contingent on implementation.",
+      "evidence_ids": [
+        "puranam_human_ai_org_design",
+        "jain_garg_khera_hai_work_design",
+        "mit_ai_work_redesign_playbook",
+        "frontiers_human_centered_ai_employee_participation_2024"
+      ],
+      "notes": "Prevents the mixed organizational posture from reading as identical to augmentation."
+    },
+    {
+      "id": "rule_selective_retraining_stratifies_mobility",
+      "name": "Selective retraining can stratify mobility gains",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "ai_exposure",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "retraining_commitment",
+                "operator": "equals",
+                "value": "selective"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "mobility",
+        "secondary": [
+          "skill_accumulation"
+        ],
+        "tendency": "mixed",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "selective_transition_support",
+      "narrative_template": "Selective retraining may improve mobility for workers who receive support while leaving others exposed to skill gaps or weaker transition pathways.",
+      "evidence_ids": [
+        "ny_fed_retrainable_ai_workers",
+        "brookings_workforce_development_us",
+        "altman_schrag_2025"
+      ],
+      "notes": "Use as a mixed pathway rather than uniformly favorable retraining."
+    },
+    {
       "id": "rule_nyc_aedt_bias_audit",
       "name": "NYC automated employment decision tool safeguards",
       "conditions": {
