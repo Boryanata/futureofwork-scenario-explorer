@@ -1,0 +1,87 @@
+[
+  {
+    "id": "united_states",
+    "name": "United States",
+    "description": "Fragmented workforce-development and social-protection context with policy variation across states and cities.",
+    "institutional_arrangement": {
+      "ai_governance": "moderate",
+      "workforce_development": "moderate",
+      "employer_retraining_incentives": "low",
+      "collective_bargaining": "weak",
+      "social_protection": "minimal",
+      "employment_protection": "weak",
+      "algorithmic_transparency": "limited",
+      "worker_information_rights": "limited"
+    },
+    "evidence_ids": [
+      "brookings_workforce_development_us",
+      "ny_fed_retrainable_ai_workers",
+      "felten_raj_seamans_2021"
+    ]
+  },
+  {
+    "id": "nyc",
+    "name": "New York City",
+    "description": "U.S. local case with workforce pathways and specific safeguards for automated employment decision tools.",
+    "institutional_arrangement": {
+      "ai_governance": "moderate",
+      "workforce_development": "moderate",
+      "employer_retraining_incentives": "low",
+      "collective_bargaining": "weak",
+      "social_protection": "minimal",
+      "employment_protection": "weak",
+      "algorithmic_transparency": "strong",
+      "worker_information_rights": "moderate",
+      "bias_audit_requirements": "strong"
+    },
+    "evidence_ids": [
+      "nyc_career_pathways",
+      "cuf_automation_nyc",
+      "nyc_aedt_bias_audit_2021"
+    ]
+  },
+  {
+    "id": "singapore",
+    "name": "Singapore",
+    "description": "Tripartite workforce-transformation model with public training infrastructure and employer-facing redesign incentives.",
+    "institutional_arrangement": {
+      "ai_governance": "moderate",
+      "workforce_development": "strong",
+      "employer_retraining_incentives": "high",
+      "collective_bargaining": "moderate",
+      "social_protection": "moderate",
+      "employment_protection": "moderate",
+      "algorithmic_transparency": "limited",
+      "worker_information_rights": "moderate"
+    },
+    "evidence_ids": [
+      "singapore_tjc_coordinated_ai_transition_2026",
+      "singapore_tjc_job_redesign_reskilling_2026",
+      "singapore_wdg_wage_retention_2026",
+      "singapore_skillsfuture_ai_readiness_2026",
+      "singapore_skillsfuture_wsg_reskilling_2025"
+    ]
+  },
+  {
+    "id": "denmark",
+    "name": "Denmark",
+    "description": "Flexicurity and collective-bargaining case with strong income security, active labor-market policy, and social-dialogue institutions.",
+    "institutional_arrangement": {
+      "ai_governance": "moderate",
+      "workforce_development": "strong",
+      "employer_retraining_incentives": "moderate",
+      "collective_bargaining": "strong",
+      "social_protection": "strong",
+      "employment_protection": "moderate",
+      "algorithmic_transparency": "moderate",
+      "worker_information_rights": "strong"
+    },
+    "evidence_ids": [
+      "kreiner_svarer_2022_flexicurity",
+      "denmark_collective_bargaining_labor_conditions_2022",
+      "denmark_unemployment_benefit_security_2022",
+      "imf_denmark_ai_labor_2025",
+      "denmark_ai_collective_bargaining_sdu_2026"
+    ]
+  }
+]

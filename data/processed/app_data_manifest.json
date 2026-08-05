@@ -1,0 +1,16 @@
+{
+  "outputs": {
+    "occupations": "data/processed/occupations.json",
+    "exposure_baselines": "data/processed/exposure_baselines.json",
+    "geography_presets": "data/processed/geography_presets.json",
+    "evidence_references": "data/processed/evidence_references.json",
+    "scenario_rules": "data/processed/scenario_rules.json"
+  },
+  "sources": {
+    "onet": "data/raw/onet/",
+    "aioe": "data/raw/aioe/AIOE-main/AIOE_DataAppendix.xlsx",
+    "oecd_ai_exposure": "data/raw/oecd/ai_exposure/OECD AI Capability Gap Index_public data.xlsx",
+    "bls_oews": "data/raw/bls/oesm25nat/national_M2025_dl.xlsx",
+    "evidence_matrix": "data/raw/literature/evidence_matrix.csv"
+  }
+}

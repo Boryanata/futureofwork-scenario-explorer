@@ -45,3 +45,14 @@ Downloaded trade union density and collective bargaining coverage files should b
 ## Policy Documents
 
 Country-specific workforce, reskilling, AI governance, and labor-market policy documents should be placed in `data/raw/policy/`.
+
+## AI Governance and Regulation Sources
+
+The corpus now includes primary governance sources to support rules on human oversight, transparency, risk management, bias audits, worker information rights, and high-risk AI systems in employment:
+
+- OECD AI Principles: https://www.oecd.org/en/topics/ai-principles.html
+- NIST AI Risk Management Framework 1.0: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10
+- European Commission AI Act guidance: https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
+- NYC Automated Employment Decision Tools law page: https://home4.nyc.gov/site/dca/about/automated-employment-decision-tools.page
+
+These sources are used alongside labor-focused sources from ILO, ETUI, UNI, and employee-participation literature. The governance sources define policy instruments; the labor sources connect those instruments to workplace and worker outcomes.

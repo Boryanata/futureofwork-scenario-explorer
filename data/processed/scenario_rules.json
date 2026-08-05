@@ -1,0 +1,1068 @@
+{
+  "source": "data/processed/scenario_rules.csv",
+  "description": "App-ready scenario rules generated from the editable CSV.",
+  "rules": [
+    {
+      "id": "rule_exposure_baseline_not_prediction",
+      "name": "AI exposure is a baseline not a forecast",
+      "conditions": {
+        "operator": "any",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "ai_exposure",
+                "operator": "equals",
+                "value": "low"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "ai_exposure",
+                "operator": "equals",
+                "value": "medium"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "ai_exposure",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "employment",
+        "secondary": [],
+        "tendency": "contextual",
+        "confidence": "stronger"
+      },
+      "work_design_pattern": "baseline_only",
+      "narrative_template": "AI exposure indicates where AI capabilities are close to occupational requirements, but it does not determine job loss, adoption speed, or realized labor outcomes.",
+      "evidence_ids": [
+        "oecd_ai_exposure_2026",
+        "felten_raj_seamans_2021",
+        "jungherr_2026"
+      ],
+      "notes": "Use before any scenario output so users understand exposure is held constant."
+    },
+    {
+      "id": "rule_strong_training_redeployment",
+      "name": "Strong workforce development improves redeployment capacity",
+      "conditions": {
+        "operator": "any",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "workforce_development",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "retraining_commitment",
+                "operator": "equals",
+                "value": "broad"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "redeployment",
+        "secondary": [
+          "skill_accumulation"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "retraining_supported_transition",
+      "narrative_template": "When workforce development and retraining capacity are strong, exposed workers are more likely to have pathways into adjacent or AI-intensive roles.",
+      "evidence_ids": [
+        "altman_schrag_2025",
+        "brookings_workforce_development_us",
+        "ny_fed_retrainable_ai_workers"
+      ],
+      "notes": "Directional, not a guarantee of individual transition success."
+    },
+    {
+      "id": "rule_weak_training_displacement_risk",
+      "name": "Weak retraining raises displacement risk",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "ai_exposure",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "retraining_commitment",
+                "operator": "in",
+                "value": [
+                  "none",
+                  "selective"
+                ]
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "workforce_development",
+                "operator": "equals",
+                "value": "weak"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "displacement",
+        "secondary": [
+          "redeployment"
+        ],
+        "tendency": "increases_risk",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "unsupported_transition",
+      "narrative_template": "High AI exposure becomes riskier when workers have limited retraining or mobility support, especially where task change requires new technical skills.",
+      "evidence_ids": [
+        "ny_fed_retrainable_ai_workers",
+        "cuf_automation_nyc",
+        "oecd_ai_exposure_2026"
+      ],
+      "notes": "Use as risk tendency, not predicted layoffs."
+    },
+    {
+      "id": "rule_worker_voice_job_quality",
+      "name": "Worker voice improves AI job quality",
+      "conditions": {
+        "operator": "any",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "worker_participation",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "collective_bargaining",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "ai_governance",
+                "operator": "equals",
+                "value": "co_governed"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "distribution_of_gains"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "participatory_augmented_work",
+      "narrative_template": "Worker participation, bargaining, and co-governance make it more likely that AI systems are implemented with attention to autonomy, transparency, and working conditions.",
+      "evidence_ids": [
+        "frontiers_human_centered_ai_employee_participation_2024",
+        "social_dialogue_algorithmic_transparency_2025",
+        "social_dialogue_labor_empowering_ai_2025"
+      ],
+      "notes": "Especially important for algorithmic management scenarios."
+    },
+    {
+      "id": "rule_algorithmic_management_job_quality_risk",
+      "name": "Opaque algorithmic management lowers job quality",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "deployment_strategy",
+                "operator": "equals",
+                "value": "automation_first"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "worker_participation",
+                "operator": "equals",
+                "value": "low"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "ai_governance",
+                "operator": "equals",
+                "value": "weak"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [],
+        "tendency": "increases_risk",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "opaque_algorithmic_control",
+      "narrative_template": "When AI is deployed through opaque monitoring, scheduling, performance management, or automated decision systems, job quality risks increase.",
+      "evidence_ids": [
+        "algorithms_as_work_designers_2021",
+        "social_dialogue_algorithmic_management_impacts_2025",
+        "etui_algorithmic_management_collective_bargaining_2021",
+        "uni_algorithmic_management_collective_action"
+      ],
+      "notes": "Use for surveillance/control-heavy organizational posture."
+    },
+    {
+      "id": "rule_augmentation_task_allocation_productivity",
+      "name": "Well-designed augmentation supports productivity and trust",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "deployment_strategy",
+                "operator": "equals",
+                "value": "augmentation"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "human_oversight",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "task_allocation",
+                "operator": "equals",
+                "value": "clear"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "productivity",
+        "secondary": [
+          "job_quality"
+        ],
+        "tendency": "improves",
+        "confidence": "stronger"
+      },
+      "work_design_pattern": "complementary_human_ai_team",
+      "narrative_template": "Clear task allocation, human oversight, contextual communication, and alignment with human intent make augmentation more likely to improve performance and trust.",
+      "evidence_ids": [
+        "puranam_human_ai_org_design",
+        "jain_garg_khera_hai_work_design",
+        "senjic_bitsch_braun_2026_task_allocation",
+        "senjic_bitsch_braun_2026_trust_transparency"
+      ],
+      "notes": "This is the core derived human-AI work design rule."
+    },
+    {
+      "id": "rule_meaningful_work_agency_risk",
+      "name": "Automating meaningful tasks can reduce agency",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "deployment_strategy",
+                "operator": "equals",
+                "value": "automation_first"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "worker_participation",
+                "operator": "equals",
+                "value": "low"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "task_meaning",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "skill_accumulation"
+        ],
+        "tendency": "increases_risk",
+        "confidence": "limited"
+      },
+      "work_design_pattern": "meaning_eroding_automation",
+      "narrative_template": "If AI targets tasks workers associate with autonomy, satisfaction, or meaning, automation-first design may reduce job quality even when efficiency improves.",
+      "evidence_ids": [
+        "ranjit_zhou_swayamdipta_quercia_2026_worker_agency",
+        "mit_ai_work_redesign_playbook"
+      ],
+      "notes": "Keep confidence limited because the newer source is emerging evidence."
+    },
+    {
+      "id": "rule_worker_centered_redesign",
+      "name": "Worker-centered redesign protects autonomy and learning",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "deployment_strategy",
+                "operator": "equals",
+                "value": "augmentation"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "worker_participation",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "skill_investment_horizon",
+                "operator": "equals",
+                "value": "long"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "skill_accumulation"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "worker_centered_redesign",
+      "narrative_template": "When workers help shape AI implementation and redesign focuses on meaningful tasks and skills, AI adoption is more likely to preserve autonomy and support learning.",
+      "evidence_ids": [
+        "mit_ai_work_redesign_playbook",
+        "ranjit_zhou_swayamdipta_quercia_2026_design_contingency",
+        "frontiers_human_centered_ai_employee_participation_2024"
+      ],
+      "notes": "Use for high-participation organizational posture."
+    },
+    {
+      "id": "rule_social_dialogue_training",
+      "name": "Social dialogue supports training commitments",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "collective_bargaining",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "workforce_development",
+                "operator": "in",
+                "value": [
+                  "moderate",
+                  "strong"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "skill_accumulation",
+        "secondary": [
+          "redeployment"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "negotiated_training_transition",
+      "narrative_template": "Social dialogue can turn AI transition into negotiated training, lifelong learning, and redeployment commitments rather than leaving adjustment to individual workers.",
+      "evidence_ids": [
+        "social_dialogue_training_lifelong_learning_ai_2025",
+        "social_dialogue_ai_transition_redeployment_2024"
+      ],
+      "notes": "Can apply beyond Europe, with case-specific caution."
+    },
+    {
+      "id": "rule_productive_constraints_distribution",
+      "name": "Productive constraints shape distribution of gains",
+      "conditions": {
+        "operator": "any",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "collective_bargaining",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "employment_protection",
+                "operator": "in",
+                "value": [
+                  "moderate",
+                  "strong"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "distribution_of_gains",
+        "secondary": [
+          "job_quality"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "constrained_high_road_ai",
+      "narrative_template": "Minimum standards and collective bargaining can discourage low-road automation strategies and support investment in skills, participation, and shared gains.",
+      "evidence_ids": [
+        "social_dialogue_productive_constraints_2025",
+        "social_dialogue_augmenting_ai_productivity_2025"
+      ],
+      "notes": "Good bridge between institutional theory and scenario outputs."
+    },
+    {
+      "id": "rule_singapore_tripartite_transition",
+      "name": "Singapore preset supports managed AI transition",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "geography",
+                "operator": "equals",
+                "value": "singapore"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "tripartite_coordination",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "singapore",
+      "outcome": {
+        "primary": "redeployment",
+        "secondary": [
+          "skill_accumulation"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "tripartite_workforce_transformation",
+      "narrative_template": "Singapore's tripartite approach links AI adoption with workforce transformation, training, targeted transition support, job redesign, and AI readiness tools.",
+      "evidence_ids": [
+        "singapore_tjc_coordinated_ai_transition_2026",
+        "singapore_tjc_job_redesign_reskilling_2026",
+        "singapore_skillsfuture_ai_readiness_2026",
+        "singapore_skillsfuture_wsg_reskilling_2025"
+      ],
+      "notes": "Use as case preset, not as a universal rule."
+    },
+    {
+      "id": "rule_singapore_employer_incentives_wages",
+      "name": "Singapore employer incentives can support wage outcomes",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "geography",
+                "operator": "equals",
+                "value": "singapore"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "employer_retraining_incentives",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "job_redesign",
+                "operator": "equals",
+                "value": "active"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "singapore",
+      "outcome": {
+        "primary": "wages",
+        "secondary": [
+          "job_quality"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "incentivized_job_redesign",
+      "narrative_template": "Where workforce-transformation grants tie business redesign to workforce outcomes, AI adoption is more likely to be linked with wage growth, retention, and capability building.",
+      "evidence_ids": [
+        "singapore_wdg_wage_retention_2026",
+        "singapore_tjc_job_redesign_reskilling_2026"
+      ],
+      "notes": "Narrow case-specific wage rule."
+    },
+    {
+      "id": "rule_denmark_flexicurity_reallocation",
+      "name": "Denmark preset supports labor reallocation",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "geography",
+                "operator": "equals",
+                "value": "denmark"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "social_protection",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "active_labor_market_policy",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "denmark",
+      "outcome": {
+        "primary": "mobility",
+        "secondary": [
+          "redeployment"
+        ],
+        "tendency": "improves",
+        "confidence": "stronger"
+      },
+      "work_design_pattern": "flexicurity_supported_reallocation",
+      "narrative_template": "Denmark's combination of labor-market flexibility, social protection, active training, and collective bargaining can support reallocation under AI exposure.",
+      "evidence_ids": [
+        "kreiner_svarer_2022_flexicurity",
+        "denmark_unemployment_benefit_security_2022",
+        "imf_denmark_ai_labor_2025"
+      ],
+      "notes": "Still include risk language for high-exposure low-complementarity groups."
+    },
+    {
+      "id": "rule_denmark_social_dialogue_ai_governance",
+      "name": "Denmark preset uses social dialogue for workplace AI",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "geography",
+                "operator": "equals",
+                "value": "denmark"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "collective_bargaining",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "denmark",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "wages"
+        ],
+        "tendency": "contextual",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "collectively_governed_ai_work",
+      "narrative_template": "Denmark is a useful case for exploring how industrial relations and social dialogue can shape AI and algorithmic management at work.",
+      "evidence_ids": [
+        "denmark_ai_collective_bargaining_sdu_2026",
+        "denmark_collective_bargaining_labor_conditions_2022"
+      ],
+      "notes": "The SDU row is based on a publication record, so avoid overclaiming."
+    },
+    {
+      "id": "rule_nyc_skills_job_quality_pathways",
+      "name": "NYC preset emphasizes skills and job quality",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "geography",
+                "operator": "equals",
+                "value": "nyc"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "workforce_development",
+                "operator": "in",
+                "value": [
+                  "moderate",
+                  "strong"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "nyc",
+      "outcome": {
+        "primary": "mobility",
+        "secondary": [
+          "job_quality"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "career_pathway_redesign",
+      "narrative_template": "NYC workforce strategy connects employer-informed skills, job quality, career pathways, and system coordination as supports for upward mobility.",
+      "evidence_ids": [
+        "nyc_career_pathways",
+        "cuf_automation_nyc"
+      ],
+      "notes": "Use with local occupation and wage data from BLS/OEWS later."
+    },
+    {
+      "id": "rule_human_oversight_regulation",
+      "name": "Human oversight requirements reduce harmful AI deployment risk",
+      "conditions": {
+        "operator": "any",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "ai_governance",
+                "operator": "equals",
+                "value": "rights_based"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "human_oversight",
+                "operator": "equals",
+                "value": "required"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "employment"
+        ],
+        "tendency": "decreases_risk",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "rights_based_human_oversight",
+      "narrative_template": "Rules requiring human oversight of AI-based workplace decisions make it less likely that consequential decisions are fully delegated to opaque automated systems.",
+      "evidence_ids": [
+        "eu_ai_act_high_risk_requirements_2024",
+        "social_dialogue_labor_empowering_ai_2025",
+        "senjic_bitsch_braun_2026_trust_transparency",
+        "algorithms_as_work_designers_2021"
+      ],
+      "notes": "Governance rule now anchored in primary EU AI Act requirements plus labor-focused sources."
+    },
+    {
+      "id": "rule_algorithmic_transparency_information_rights",
+      "name": "Algorithmic transparency supports worker voice",
+      "conditions": {
+        "operator": "any",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "algorithmic_transparency",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "worker_information_rights",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "distribution_of_gains"
+        ],
+        "tendency": "decreases_risk",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "transparent_algorithmic_management",
+      "narrative_template": "Transparency and information rights help workers and representatives understand, contest, and govern AI systems that affect hiring, scheduling, evaluation, layoffs, and working conditions.",
+      "evidence_ids": [
+        "eu_ai_act_high_risk_requirements_2024",
+        "oecd_ai_principles_implementation_2023",
+        "social_dialogue_algorithmic_transparency_2025",
+        "etui_algorithmic_management_collective_bargaining_2021",
+        "uni_algorithmic_management_collective_action"
+      ],
+      "notes": "This should become a visible institutional control or sub-control under AI governance."
+    },
+    {
+      "id": "rule_data_protection_bias_safeguards",
+      "name": "Data protection and bias safeguards reduce workplace AI harms",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "data_protection",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "anti_discrimination_rules",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "employment"
+        ],
+        "tendency": "decreases_risk",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "accountable_ai_management",
+      "narrative_template": "Data protection, bias safeguards, and risk assessment requirements can reduce harms from AI systems used in management, hiring, evaluation, and worker profiling.",
+      "evidence_ids": [
+        "eu_ai_act_employment_high_risk_2024",
+        "nist_ai_rmf_core_2023",
+        "oecd_due_diligence_responsible_ai_2026",
+        "social_dialogue_labor_empowering_ai_2025",
+        "etui_algorithmic_management_collective_bargaining_2021",
+        "frontiers_human_centered_ai_employee_participation_2024"
+      ],
+      "notes": "Could later split into separate data rights and anti-discrimination rules if the app needs more granularity."
+    },
+    {
+      "id": "rule_worker_consultation_ai_adoption",
+      "name": "Consultation rights shape AI adoption before deployment",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "worker_consultation_rights",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "ai_adoption_stage",
+                "operator": "equals",
+                "value": "pre_deployment"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "job_quality",
+        "secondary": [
+          "skill_accumulation"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "consultative_ai_adoption",
+      "narrative_template": "When workers or representatives are consulted before AI adoption, organizations are more likely to surface job-quality, skills, privacy, and implementation risks early.",
+      "evidence_ids": [
+        "oecd_due_diligence_responsible_ai_2026",
+        "oecd_ai_principles_implementation_2023",
+        "frontiers_human_centered_ai_employee_participation_2024",
+        "social_dialogue_algorithmic_transparency_2025",
+        "mit_ai_work_redesign_playbook"
+      ],
+      "notes": "Important process rule: it affects how organizational decisions are made, not only outcomes after deployment."
+    },
+    {
+      "id": "rule_social_protection_transition_buffer",
+      "name": "Social protection buffers transition risk",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "social_protection",
+                "operator": "equals",
+                "value": "strong"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "ai_exposure",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "mobility",
+        "secondary": [
+          "redeployment"
+        ],
+        "tendency": "improves",
+        "confidence": "stronger"
+      },
+      "work_design_pattern": "socially_buffered_transition",
+      "narrative_template": "Income security and transition supports can give workers more room to move between jobs, participate in training, and adapt to AI-related occupational change.",
+      "evidence_ids": [
+        "kreiner_svarer_2022_flexicurity",
+        "denmark_unemployment_benefit_security_2022",
+        "imf_denmark_ai_labor_2025"
+      ],
+      "notes": "Most strongly supported by Denmark evidence; use generally with lower confidence outside similar institutions."
+    },
+    {
+      "id": "rule_employer_retraining_incentives",
+      "name": "Employer retraining incentives tie AI adoption to worker outcomes",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "employer_retraining_incentives",
+                "operator": "equals",
+                "value": "high"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "job_redesign",
+                "operator": "equals",
+                "value": "active"
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "general",
+      "outcome": {
+        "primary": "skill_accumulation",
+        "secondary": [
+          "wages"
+        ],
+        "tendency": "improves",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "incentivized_workforce_transformation",
+      "narrative_template": "When public policy or funding incentives tie AI adoption to job redesign, reskilling, retention, or wage outcomes, firms have stronger reasons to invest in worker adaptation.",
+      "evidence_ids": [
+        "oecd_ai_principles_implementation_2023",
+        "singapore_wdg_wage_retention_2026",
+        "singapore_tjc_job_redesign_reskilling_2026",
+        "singapore_skillsfuture_ai_readiness_2026"
+      ],
+      "notes": "Currently strongest as Singapore evidence; OECD principles implementation gives the broader policy frame."
+    },
+    {
+      "id": "rule_nyc_aedt_bias_audit",
+      "name": "NYC automated employment decision tool safeguards",
+      "conditions": {
+        "operator": "all",
+        "clauses": [
+          {
+            "all": [
+              {
+                "field": "geography",
+                "operator": "equals",
+                "value": "nyc"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "hiring_screening_ai",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "geography": "nyc",
+      "outcome": {
+        "primary": "employment",
+        "secondary": [
+          "job_quality"
+        ],
+        "tendency": "decreases_risk",
+        "confidence": "moderate"
+      },
+      "work_design_pattern": "audited_hiring_ai",
+      "narrative_template": "For AI used in hiring or promotion screening, bias-audit and disclosure requirements can reduce unchecked employment-screening risk.",
+      "evidence_ids": [
+        "nyc_aedt_bias_audit_2021",
+        "eu_ai_act_employment_high_risk_2024"
+      ],
+      "notes": "NYC-specific governance rule for AEDT use; distinct from NYC workforce-development rule."
+    }
+  ]
+}

@@ -51,6 +51,12 @@ literature + datasets
   -> interactive explorer outputs
 ```
 
+The scenario-rule layer is documented in:
+
+```text
+docs/scenario-rules-codebook.md
+```
+
 ## Columns
 
 ```text
@@ -58,13 +64,17 @@ source_id
 citation
 source_type
 evidence_type
+source_file
+page_ref
 institutional_dimension
 organizational_mechanism
 outcome_dimension
 geography
 claim_summary
+evidence_excerpt
 direction
 confidence
+verification_status
 notes
 ```
 
@@ -83,11 +93,17 @@ Academic article, working paper, policy report, dataset, government document, hi
 evidence_type
 Theory, quantitative baseline, qualitative finding, comparative case, historical precedent, policy description, or empirical association.
 
+source_file
+Relative path to the source file or extracted text file.
+
+page_ref
+Page number or page range when available. Use blank if not yet verified.
+
 institutional_dimension
-The institutional variable involved, such as AI governance, workforce development, collective bargaining, social protection, employment protection, public investment, or employer retraining incentives.
+The institutional variable involved, such as AI governance, workforce development, collective bargaining, social protection, employment protection, public investment, or employer retraining incentives. Use `not_applicable` when the row is about baseline exposure or organizational/work-design logic rather than an institutional variable.
 
 organizational_mechanism
-The firm/workplace mechanism involved, such as automation-first deployment, augmentation, retraining, worker participation, job redesign, preservation of junior work, or skill investment.
+The firm/workplace mechanism involved, such as automation-first deployment, augmentation, retraining, worker participation, job redesign, preservation of junior work, or skill investment. Use `not_applicable` when the row is about a baseline, policy context, or institutional condition rather than a firm/workplace mechanism.
 
 outcome_dimension
 The labor outcome affected: employment, wages, mobility, productivity, redeployment, displacement, skill accumulation, or distribution of gains.
@@ -98,11 +114,17 @@ General, United States, NYC, Denmark, Singapore, OECD, etc.
 claim_summary
 One concise sentence describing the claim.
 
+evidence_excerpt
+A short source excerpt or paraphrased snippet used to verify the row. Keep this concise.
+
 direction
 improves, worsens, mixed, increases_risk, decreases_risk, or contextual.
 
 confidence
 limited, moderate, or stronger.
+
+verification_status
+draft, excerpt_verified, page_verified, or needs_review.
 
 notes
 Page number, quote fragment, caveat, or link to source file.
