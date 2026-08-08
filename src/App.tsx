@@ -69,6 +69,7 @@ type ComparisonSnapshot = {
   occupationTitle: string;
   exposureLevel: string;
   exposureScore: number | null;
+  comparisonSignature: string;
   institutionLabel: string;
   organizationLabel: string;
   workDesign: WorkDesign;
@@ -394,6 +395,31 @@ function buildContext(
     ...institutionalValues,
     ...organizationalValues,
   };
+}
+
+function orderedScenarioValues(
+  controls: ControlConfig[],
+  values: Record<string, string | boolean>,
+): Array<[string, string | boolean]> {
+  const controlFields = controls.map((control) => control.field);
+  const remainingFields = Object.keys(values)
+    .filter((field) => !controlFields.includes(field))
+    .sort();
+  return [...controlFields, ...remainingFields].map((field) => [field, values[field]]);
+}
+
+function buildComparisonSignature(
+  occupation: OccupationProfile,
+  geography: string,
+  institutionalValues: Record<string, string | boolean>,
+  organizationalValues: Record<string, string | boolean>,
+): string {
+  return JSON.stringify({
+    occupationCode: occupation.onet_soc_code,
+    geography,
+    institutionalValues: orderedScenarioValues(institutionalControls, institutionalValues),
+    organizationalValues: orderedScenarioValues(organizationControls, organizationalValues),
+  });
 }
 
 function getPresetLabel(preset: Preset, overrides: Record<string, unknown>): string {
@@ -1271,6 +1297,13 @@ function App() {
   const institutionLabel = getPresetLabel(institutionPreset, institutionalOverrides);
   const organizationLabel = getPresetLabel(organizationPreset, organizationalOverrides);
   const scenarioTaskAssignments = buildScenarioTaskAssignments(occupation, institutionalValues, organizationalValues);
+  const currentComparisonSignature = buildComparisonSignature(
+    occupation,
+    geography,
+    institutionalValues,
+    organizationalValues,
+  );
+  const comparisonReady = Boolean(comparison && comparison.comparisonSignature !== currentComparisonSignature);
   const scenarioSignature = [
     occupation.onet_soc_code,
     institutionPresetId,
@@ -1338,12 +1371,12 @@ function App() {
       occupationTitle: occupation.title,
       exposureLevel: occupation.exposure_baseline.combined_level ?? "unknown",
       exposureScore: occupation.exposure_baseline.combined_score ?? null,
+      comparisonSignature: currentComparisonSignature,
       institutionLabel,
       organizationLabel,
       workDesign,
       result,
     });
-    window.setTimeout(() => document.getElementById("compare")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   }
 
   return (
@@ -1672,12 +1705,28 @@ function App() {
             Save the current future, then change the institutional arrangement or organizational response above.
           </p>
         </div>
-        <button type="button" className="primary-button" onClick={saveComparison}>
-          {comparison ? "Replace Future A with current scenario" : "Compare another future"}
-        </button>
+        {comparison ? (
+          <div>
+            <p>
+              <strong>Future A saved.</strong>
+            </p>
+            <p>
+              {comparisonReady
+                ? "The current scenario is now Future B in the comparison below."
+                : "Change the institutional arrangement or organizational response above to create Future B."}
+            </p>
+            <button type="button" className="text-button" onClick={saveComparison}>
+              Replace Future A with current scenario
+            </button>
+          </div>
+        ) : (
+          <button type="button" className="primary-button" onClick={saveComparison}>
+            Save as Future A
+          </button>
+        )}
       </section>
 
-      {comparison && (
+      {comparisonReady && comparison && (
         <ComparePanel
           snapshot={comparison}
           currentInstitutionLabel={institutionLabel}
