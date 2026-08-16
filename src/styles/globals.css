@@ -1241,6 +1241,28 @@ select {
   font-size: 0.75rem;
 }
 
+.outcome-divergence-note {
+  margin: 12px 0 2px;
+  padding: 14px 0;
+  border-top: 1px solid #dfe0da;
+  border-bottom: 1px solid #dfe0da;
+}
+
+.outcome-divergence-note p {
+  max-width: 980px;
+  margin: 0 auto;
+  color: #68716e;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.outcome-divergence-note strong {
+  color: #26322f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
 /* Outcomes */
 
 .outcomes-list {

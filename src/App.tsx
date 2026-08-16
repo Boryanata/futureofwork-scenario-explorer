@@ -3175,6 +3175,16 @@ function App() {
           </p>
         </div>
 
+        <div className="outcome-divergence-note">
+          <p>
+            <strong>This divergence is intentional, not a glitch.</strong>{" "}
+            A scenario can increase productivity potential while also increasing
+            displacement pressure or weakening skill formation. Positions below are
+            evidence-informed qualitative tendencies synthesized from matched rules,
+            not measured forecasts.
+          </p>
+        </div>
+
         <OutcomesExplorer key={scenarioSignature} result={result} />
       </section>
 
