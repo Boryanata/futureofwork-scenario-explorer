@@ -8,6 +8,9 @@
   },
   "sources": {
     "onet": "data/raw/onet/",
+    "onet_job_titles": "data/raw/onet/job_titles.csv",
+    "onet_reported_titles_optional": "data/raw/onet/sample_of_reported_titles.csv",
+    "soc_hierarchy": "derived from BLS OEWS occupational group rows",
     "aioe": "data/raw/aioe/AIOE-main/AIOE_DataAppendix.xlsx",
     "oecd_ai_exposure": "data/raw/oecd/ai_exposure/OECD AI Capability Gap Index_public data.xlsx",
     "bls_oews": "data/raw/bls/oesm25nat/national_M2025_dl.xlsx",

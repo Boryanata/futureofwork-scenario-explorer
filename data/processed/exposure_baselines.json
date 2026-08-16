@@ -1,5 +1,24 @@
 [
   {
+    "onet_soc_code": "11-9199.02",
+    "soc_code": "11-9199",
+    "title": "Compliance Managers",
+    "combined_score": 0.7354,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.9646872,
+      "percentile": 0.7351,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7356631574037227,
+      "total_gap": 6.079747379714377,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "13-2011.00",
     "soc_code": "13-2011",
     "title": "Accountants and Auditors",
@@ -199,25 +218,6 @@
     }
   },
   {
-    "onet_soc_code": "41-3011.00",
-    "soc_code": "41-3011",
-    "title": "Advertising Sales Agents",
-    "combined_score": 0.8265,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.162588,
-      "percentile": 0.8127,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8403051295606907,
-      "total_gap": 3.672982020104115,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "11-2011.00",
     "soc_code": "11-2011",
     "title": "Advertising and Promotions Managers",
@@ -275,6 +275,25 @@
     }
   },
   {
+    "onet_soc_code": "45-2091.00",
+    "soc_code": "45-2091",
+    "title": "Agricultural Equipment Operators",
+    "combined_score": 0.5236,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -1.145156,
+      "percentile": 0.1421,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9051264193050127,
+      "total_gap": 2.1820923559847074,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "13-1011.00",
     "soc_code": "13-1011",
     "title": "Agents and Business Managers of Artists, Performers, and Athletes",
@@ -308,25 +327,6 @@
     "oecd": {
       "score": 0.8036110925009908,
       "total_gap": 4.516944872477211,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "45-2091.00",
-    "soc_code": "45-2091",
-    "title": "Agricultural Equipment Operators",
-    "combined_score": 0.5236,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -1.145156,
-      "percentile": 0.1421,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9051264193050127,
-      "total_gap": 2.1820923559847074,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -462,6 +462,15 @@
     "oecd": null
   },
   {
+    "onet_soc_code": "53-6032.00",
+    "soc_code": "53-6032",
+    "title": "Aircraft Service Attendants",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
+  },
+  {
     "onet_soc_code": "49-3011.00",
     "soc_code": "49-3011",
     "title": "Aircraft Mechanics and Service Technicians",
@@ -479,15 +488,6 @@
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
-  },
-  {
-    "onet_soc_code": "53-6032.00",
-    "soc_code": "53-6032",
-    "title": "Aircraft Service Attendants",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
   },
   {
     "onet_soc_code": "51-2011.00",
@@ -1141,25 +1141,6 @@
     }
   },
   {
-    "onet_soc_code": "29-1181.00",
-    "soc_code": "29-1181",
-    "title": "Audiologists",
-    "combined_score": 0.6961,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.6329063,
-      "percentile": 0.6499,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7422563286483456,
-      "total_gap": 5.928104441088053,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "49-2097.00",
     "soc_code": "49-2097",
     "title": "Audiovisual Equipment Installers and Repairers",
@@ -1174,6 +1155,158 @@
     "oecd": {
       "score": 0.8805119542477275,
       "total_gap": 2.748225052302267,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "13-1032.00",
+    "soc_code": "13-1032",
+    "title": "Insurance Appraisers, Auto Damage",
+    "combined_score": 0.7981,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.6634955,
+      "percentile": 0.6525,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9437423613197254,
+      "total_gap": 1.293925689646315,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "47-3013.00",
+    "soc_code": "47-3013",
+    "title": "Helpers--Electricians",
+    "combined_score": 0.4802,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -1.506896,
+      "percentile": 0.0594,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9009747509604573,
+      "total_gap": 2.2775807279094806,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "49-3022.00",
+    "soc_code": "49-3022",
+    "title": "Automotive Glass Installers and Repairers",
+    "combined_score": 0.5202,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -1.202285,
+      "percentile": 0.1202,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9201350203611591,
+      "total_gap": 1.8368945316933392,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "13-1081.01",
+    "soc_code": "13-1081",
+    "title": "Logistics Engineers",
+    "combined_score": 0.8665,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.297303,
+      "percentile": 0.8811,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8518417878301565,
+      "total_gap": 3.4076388799064006,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "41-2022.00",
+    "soc_code": "41-2022",
+    "title": "Parts Salespersons",
+    "combined_score": 0.715,
+    "combined_level": "high",
+    "aioe": {
+      "score": -0.1184909,
+      "percentile": 0.4884,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9415052691813041,
+      "total_gap": 1.3453788088300058,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "49-3023.00",
+    "soc_code": "49-3023",
+    "title": "Automotive Service Technicians and Mechanics",
+    "combined_score": 0.5097,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -0.9547055,
+      "percentile": 0.2158,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8035528852307591,
+      "total_gap": 4.518283639692541,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "51-9197.00",
+    "soc_code": "51-9197",
+    "title": "Tire Builders",
+    "combined_score": 0.4981,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -1.610915,
+      "percentile": 0.0452,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.950929689570702,
+      "total_gap": 1.1286171398738531,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "51-6093.00",
+    "soc_code": "51-6093",
+    "title": "Upholsterers",
+    "combined_score": 0.4772,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -1.313735,
+      "percentile": 0.0891,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8653184232548152,
+      "total_gap": 3.097676265139249,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -1231,44 +1364,6 @@
     "oecd": {
       "score": 0.8531588999085753,
       "total_gap": 3.3773453021027677,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "49-3022.00",
-    "soc_code": "49-3022",
-    "title": "Automotive Glass Installers and Repairers",
-    "combined_score": 0.5202,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -1.202285,
-      "percentile": 0.1202,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9201350203611591,
-      "total_gap": 1.8368945316933392,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "49-3023.00",
-    "soc_code": "49-3023",
-    "title": "Automotive Service Technicians and Mechanics",
-    "combined_score": 0.5097,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -0.9547055,
-      "percentile": 0.2158,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8035528852307591,
-      "total_gap": 4.518283639692541,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -1734,25 +1829,6 @@
     }
   },
   {
-    "onet_soc_code": "15-2041.01",
-    "soc_code": "15-2041",
-    "title": "Biostatisticians",
-    "combined_score": 0.874,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.382724,
-      "percentile": 0.9522,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7957786056431218,
-      "total_gap": 4.6970920702082,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "15-1299.07",
     "soc_code": "15-1299",
     "title": "Blockchain Engineers",
@@ -1942,15 +2018,6 @@
     "oecd": null
   },
   {
-    "onet_soc_code": "53-3051.00",
-    "soc_code": "53-3051",
-    "title": "Bus Drivers, School",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
-  },
-  {
     "onet_soc_code": "53-3052.00",
     "soc_code": "53-3052",
     "title": "Bus Drivers, Transit and Intercity",
@@ -2031,25 +2098,6 @@
     "oecd": null
   },
   {
-    "onet_soc_code": "25-1011.00",
-    "soc_code": "25-1011",
-    "title": "Business Teachers, Postsecondary",
-    "combined_score": 0.8189,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.349314,
-      "percentile": 0.9315,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7063955544777415,
-      "total_gap": 6.752902247011946,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "51-3021.00",
     "soc_code": "51-3021",
     "title": "Butchers and Meat Cutters",
@@ -2083,6 +2131,72 @@
     "oecd": {
       "score": 0.873404721467746,
       "total_gap": 2.911691406241843,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "29-1181.00",
+    "soc_code": "29-1181",
+    "title": "Audiologists",
+    "combined_score": 0.6961,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.6329063,
+      "percentile": 0.6499,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7422563286483456,
+      "total_gap": 5.928104441088053,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "53-3051.00",
+    "soc_code": "53-3051",
+    "title": "Bus Drivers, School",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
+  },
+  {
+    "onet_soc_code": "11-9199.01",
+    "soc_code": "11-9199",
+    "title": "Regulatory Affairs Managers",
+    "combined_score": 0.7393,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.9646872,
+      "percentile": 0.7351,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7434998158975645,
+      "total_gap": 5.899504234356016,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "25-1011.00",
+    "soc_code": "25-1011",
+    "title": "Business Teachers, Postsecondary",
+    "combined_score": 0.8189,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.349314,
+      "percentile": 0.9315,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7063955544777415,
+      "total_gap": 6.752902247011946,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -2429,25 +2543,6 @@
     }
   },
   {
-    "onet_soc_code": "51-8091.00",
-    "soc_code": "51-8091",
-    "title": "Chemical Plant and System Operators",
-    "combined_score": 0.654,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -0.3831282,
-      "percentile": 0.4173,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8907900174049487,
-      "total_gap": 2.5118295996861804,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "19-4031.00",
     "soc_code": "19-4031",
     "title": "Chemical Technicians",
@@ -2462,6 +2557,25 @@
     "oecd": {
       "score": 0.8995465497165185,
       "total_gap": 2.310429356520075,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "51-8091.00",
+    "soc_code": "51-8091",
+    "title": "Chemical Plant and System Operators",
+    "combined_score": 0.654,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -0.3831282,
+      "percentile": 0.4173,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8907900174049487,
+      "total_gap": 2.5118295996861804,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -2486,20 +2600,20 @@
     }
   },
   {
-    "onet_soc_code": "19-2031.00",
-    "soc_code": "19-2031",
-    "title": "Chemists",
-    "combined_score": 0.7327,
+    "onet_soc_code": "29-2052.00",
+    "soc_code": "29-2052",
+    "title": "Pharmacy Technicians",
+    "combined_score": 0.7399,
     "combined_level": "high",
     "aioe": {
-      "score": 0.5011251,
-      "percentile": 0.6214,
+      "score": 0.0070256,
+      "percentile": 0.5142,
       "level": "medium",
       "source": "Felten, Raj, and Seamans AIOE"
     },
     "oecd": {
-      "score": 0.8439850109855596,
-      "total_gap": 3.5883447473321297,
+      "score": 0.9655770764434002,
+      "total_gap": 0.7917272418017944,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -2761,6 +2875,25 @@
     "oecd": {
       "score": 0.9369880383782836,
       "total_gap": 1.4492751172994787,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "29-2012.00",
+    "soc_code": "29-2012",
+    "title": "Medical and Clinical Laboratory Technicians",
+    "combined_score": 0.7084,
+    "combined_level": "high",
+    "aioe": {
+      "score": -0.1273315,
+      "percentile": 0.4832,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9336131535631097,
+      "total_gap": 1.5268974680484764,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -3077,25 +3210,6 @@
     }
   },
   {
-    "onet_soc_code": "11-9199.02",
-    "soc_code": "11-9199",
-    "title": "Compliance Managers",
-    "combined_score": 0.7354,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.9646872,
-      "percentile": 0.7351,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7356631574037227,
-      "total_gap": 6.079747379714377,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "13-1041.00",
     "soc_code": "13-1041",
     "title": "Compliance Officers",
@@ -3143,20 +3257,6 @@
     "oecd": {
       "score": 0.8488683145141376,
       "total_gap": 3.476028766174835,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "15-1231.00",
-    "soc_code": "15-1231",
-    "title": "Computer Network Support Specialists",
-    "combined_score": 0.943,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.9430407921628651,
-      "total_gap": 1.3100617802541024,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -3232,20 +3332,6 @@
     }
   },
   {
-    "onet_soc_code": "15-1211.00",
-    "soc_code": "15-1211",
-    "title": "Computer Systems Analysts",
-    "combined_score": 0.8246,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.8246315037853091,
-      "total_gap": 4.033475412937889,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "15-1299.08",
     "soc_code": "15-1299",
     "title": "Computer Systems Engineers/Architects",
@@ -3255,34 +3341,6 @@
     "oecd": {
       "score": 0.8036208565643036,
       "total_gap": 4.516720299021017,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "15-1232.00",
-    "soc_code": "15-1232",
-    "title": "Computer User Support Specialists",
-    "combined_score": 0.9084,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.9083550674150939,
-      "total_gap": 2.1078334494528406,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "15-1221.00",
-    "soc_code": "15-1221",
-    "title": "Computer and Information Research Scientists",
-    "combined_score": 0.7005,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.7004698244823643,
-      "total_gap": 6.8891940369056215,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -3894,6 +3952,25 @@
     "oecd": null
   },
   {
+    "onet_soc_code": "33-3021.06",
+    "soc_code": "33-3021",
+    "title": "Intelligence Analysts",
+    "combined_score": 0.6621,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.2257696,
+      "percentile": 0.5698,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7543483699555564,
+      "total_gap": 5.649987491022202,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "25-1111.00",
     "soc_code": "25-1111",
     "title": "Criminal Justice and Law Enforcement Teachers, Postsecondary",
@@ -3908,25 +3985,6 @@
     "oecd": {
       "score": 0.7395120477928868,
       "total_gap": 5.991222900763603,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-1141.03",
-    "soc_code": "29-1141",
-    "title": "Critical Care Nurses",
-    "combined_score": 0.6194,
-    "combined_level": "medium",
-    "aioe": {
-      "score": 0.2294097,
-      "percentile": 0.5724,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.6664082555067155,
-      "total_gap": 7.672610123345546,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -4103,6 +4161,20 @@
     }
   },
   {
+    "onet_soc_code": "15-1221.00",
+    "soc_code": "15-1221",
+    "title": "Computer and Information Research Scientists",
+    "combined_score": 0.7005,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.7004698244823643,
+      "total_gap": 6.8891940369056215,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "29-2011.01",
     "soc_code": "29-2011",
     "title": "Cytogenetic Technologists",
@@ -4139,6 +4211,24 @@
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
+  },
+  {
+    "onet_soc_code": "25-2056.00",
+    "soc_code": "25-2056",
+    "title": "Special Education Teachers, Elementary School",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
+  },
+  {
+    "onet_soc_code": "25-2055.00",
+    "soc_code": "25-2055",
+    "title": "Special Education Teachers, Kindergarten",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
   },
   {
     "onet_soc_code": "27-2031.00",
@@ -4186,34 +4276,6 @@
     "combined_level": null,
     "aioe": null,
     "oecd": null
-  },
-  {
-    "onet_soc_code": "15-1243.01",
-    "soc_code": "15-1243",
-    "title": "Data Warehousing Specialists",
-    "combined_score": 0.9547,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.9546936277462088,
-      "total_gap": 1.0420465618371964,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "15-1242.00",
-    "soc_code": "15-1242",
-    "title": "Database Administrators",
-    "combined_score": 0.9349,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.9349263849498384,
-      "total_gap": 1.4966931461537172,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
   },
   {
     "onet_soc_code": "15-1243.00",
@@ -4466,6 +4528,25 @@
     }
   },
   {
+    "onet_soc_code": "41-3011.00",
+    "soc_code": "41-3011",
+    "title": "Advertising Sales Agents",
+    "combined_score": 0.8265,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.162588,
+      "percentile": 0.8127,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8403051295606907,
+      "total_gap": 3.672982020104115,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "15-1299.06",
     "soc_code": "15-1299",
     "title": "Digital Forensics Analysts",
@@ -4676,6 +4757,29 @@
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
+  },
+  {
+    "onet_soc_code": "11-9179.01",
+    "soc_code": "11-9179",
+    "title": "Fitness and Wellness Coordinators",
+    "combined_score": 0.85,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.8499826221656714,
+      "total_gap": 3.450399690189556,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "29-2043.00",
+    "soc_code": "29-2043",
+    "title": "Paramedics",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
   },
   {
     "onet_soc_code": "47-5023.00",
@@ -6195,6 +6299,25 @@
     }
   },
   {
+    "onet_soc_code": "49-2098.00",
+    "soc_code": "49-2098",
+    "title": "Security and Fire Alarm Systems Installers",
+    "combined_score": 0.5953,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -0.6926484,
+      "percentile": 0.3165,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8741993709476494,
+      "total_gap": 2.893414468204064,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "33-2021.00",
     "soc_code": "33-2021",
     "title": "Fire Inspectors and Investigators",
@@ -6655,20 +6778,6 @@
     "oecd": {
       "score": 0.8547512856806658,
       "total_gap": 3.3407204293446853,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "11-9179.01",
-    "soc_code": "11-9179",
-    "title": "Fitness and Wellness Coordinators",
-    "combined_score": 0.85,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.8499826221656714,
-      "total_gap": 3.450399690189556,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -7237,6 +7346,44 @@
     }
   },
   {
+    "onet_soc_code": "19-3092.00",
+    "soc_code": "19-3092",
+    "title": "Geographers",
+    "combined_score": 0.8811,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.436298,
+      "percentile": 0.9793,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.782811869866139,
+      "total_gap": 4.995326993078802,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "17-3031.00",
+    "soc_code": "17-3031",
+    "title": "Surveying and Mapping Technicians",
+    "combined_score": 0.7418,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.0852324,
+      "percentile": 0.5375,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.946147752794213,
+      "total_gap": 1.2386016857331015,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "43-3041.00",
     "soc_code": "43-3041",
     "title": "Gambling Cage Workers",
@@ -7379,25 +7526,6 @@
     }
   },
   {
-    "onet_soc_code": "51-8092.00",
-    "soc_code": "51-8092",
-    "title": "Gas Plant Operators",
-    "combined_score": 0.6783,
-    "combined_level": "high",
-    "aioe": {
-      "score": -0.2982082,
-      "percentile": 0.4367,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9198509266260136,
-      "total_gap": 1.843428687601687,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "51-9071.06",
     "soc_code": "51-9071",
     "title": "Gem and Diamond Workers",
@@ -7412,20 +7540,6 @@
     "oecd": {
       "score": 0.9079929127623294,
       "total_gap": 2.1161630064664223,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-1216.00",
-    "soc_code": "29-1216",
-    "title": "General Internal Medicine Physicians",
-    "combined_score": 0.6801,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.6801365743275205,
-      "total_gap": 7.3568587904670295,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -7469,25 +7583,6 @@
     }
   },
   {
-    "onet_soc_code": "19-1029.03",
-    "soc_code": "19-1029",
-    "title": "Geneticists",
-    "combined_score": 0.7237,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.010193,
-      "percentile": 0.7468,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7006764739483233,
-      "total_gap": 6.884441099188564,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "17-1022.01",
     "soc_code": "17-1022",
     "title": "Geodetic Surveyors",
@@ -7502,25 +7597,6 @@
     "oecd": {
       "score": 0.9495220180493468,
       "total_gap": 1.1609935848650252,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "19-3092.00",
-    "soc_code": "19-3092",
-    "title": "Geographers",
-    "combined_score": 0.8811,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.436298,
-      "percentile": 0.9793,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.782811869866139,
-      "total_gap": 4.995326993078802,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -7592,25 +7668,6 @@
     }
   },
   {
-    "onet_soc_code": "11-3051.02",
-    "soc_code": "11-3051",
-    "title": "Geothermal Production Managers",
-    "combined_score": 0.7228,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.5086878,
-      "percentile": 0.6266,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8189342939382623,
-      "total_gap": 4.164511239419966,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "49-9099.01",
     "soc_code": "49-9099",
     "title": "Geothermal Technicians",
@@ -7625,6 +7682,25 @@
     "oecd": {
       "score": 0.8601826621331724,
       "total_gap": 3.2157987709370346,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "11-3051.02",
+    "soc_code": "11-3051",
+    "title": "Geothermal Production Managers",
+    "combined_score": 0.7228,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.5086878,
+      "percentile": 0.6266,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8189342939382623,
+      "total_gap": 4.164511239419966,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -8083,25 +8159,6 @@
     }
   },
   {
-    "onet_soc_code": "47-3013.00",
-    "soc_code": "47-3013",
-    "title": "Helpers--Electricians",
-    "combined_score": 0.4802,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -1.506896,
-      "percentile": 0.0594,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9009747509604573,
-      "total_gap": 2.2775807279094806,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "47-5081.00",
     "soc_code": "47-5081",
     "title": "Helpers--Extraction Workers",
@@ -8249,25 +8306,6 @@
     "oecd": null
   },
   {
-    "onet_soc_code": "19-3093.00",
-    "soc_code": "19-3093",
-    "title": "Historians",
-    "combined_score": 0.7777,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.098921,
-      "percentile": 0.7817,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7736255372393259,
-      "total_gap": 5.206612643495504,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "25-1125.00",
     "soc_code": "25-1125",
     "title": "History Teachers, Postsecondary",
@@ -8353,20 +8391,6 @@
     "oecd": {
       "score": 0.7845984438558721,
       "total_gap": 4.954235791314943,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-1229.02",
-    "soc_code": "29-1229",
-    "title": "Hospitalists",
-    "combined_score": 0.6953,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.6953323131990663,
-      "total_gap": 7.007356796421476,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -8552,6 +8576,109 @@
     }
   },
   {
+    "onet_soc_code": "29-1141.03",
+    "soc_code": "29-1141",
+    "title": "Critical Care Nurses",
+    "combined_score": 0.6194,
+    "combined_level": "medium",
+    "aioe": {
+      "score": 0.2294097,
+      "percentile": 0.5724,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.6664082555067155,
+      "total_gap": 7.672610123345546,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "11-3013.01",
+    "soc_code": "11-3013",
+    "title": "Security Managers",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
+  },
+  {
+    "onet_soc_code": "15-1243.01",
+    "soc_code": "15-1243",
+    "title": "Data Warehousing Specialists",
+    "combined_score": 0.9547,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.9546936277462088,
+      "total_gap": 1.0420465618371964,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "15-1231.00",
+    "soc_code": "15-1231",
+    "title": "Computer Network Support Specialists",
+    "combined_score": 0.943,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.9430407921628651,
+      "total_gap": 1.3100617802541024,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "19-4099.01",
+    "soc_code": "19-4099",
+    "title": "Quality Control Analysts",
+    "combined_score": 0.7682,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.4501044,
+      "percentile": 0.6098,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9266434277440597,
+      "total_gap": 1.6872011618866267,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "15-1212.00",
+    "soc_code": "15-1212",
+    "title": "Information Security Analysts",
+    "combined_score": 0.8362,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.8361931343571484,
+      "total_gap": 3.7675579097855874,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "15-1211.00",
+    "soc_code": "15-1211",
+    "title": "Computer Systems Analysts",
+    "combined_score": 0.8246,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.8246315037853091,
+      "total_gap": 4.033475412937889,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "19-2041.03",
     "soc_code": "19-2041",
     "title": "Industrial Ecologists",
@@ -8585,25 +8712,6 @@
     "oecd": {
       "score": 0.9150610912424346,
       "total_gap": 1.9535949014240046,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "17-2112.00",
-    "soc_code": "17-2112",
-    "title": "Industrial Engineers",
-    "combined_score": 0.8444,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.13787,
-      "percentile": 0.7984,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8904765211631205,
-      "total_gap": 2.5190400132482296,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -8701,20 +8809,6 @@
     "combined_level": null,
     "aioe": null,
     "oecd": null
-  },
-  {
-    "onet_soc_code": "15-1212.00",
-    "soc_code": "15-1212",
-    "title": "Information Security Analysts",
-    "combined_score": 0.8362,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.8361931343571484,
-      "total_gap": 3.7675579097855874,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
   },
   {
     "onet_soc_code": "15-1299.05",
@@ -8839,25 +8933,6 @@
     }
   },
   {
-    "onet_soc_code": "13-1032.00",
-    "soc_code": "13-1032",
-    "title": "Insurance Appraisers, Auto Damage",
-    "combined_score": 0.7981,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.6634955,
-      "percentile": 0.6525,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9437423613197254,
-      "total_gap": 1.293925689646315,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "43-9041.00",
     "soc_code": "43-9041",
     "title": "Insurance Claims and Policy Processing Clerks",
@@ -8915,25 +8990,6 @@
     }
   },
   {
-    "onet_soc_code": "33-3021.06",
-    "soc_code": "33-3021",
-    "title": "Intelligence Analysts",
-    "combined_score": 0.6621,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.2257696,
-      "percentile": 0.5698,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7543483699555564,
-      "total_gap": 5.649987491022202,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "27-1025.00",
     "soc_code": "27-1025",
     "title": "Interior Designers",
@@ -8948,6 +9004,20 @@
     "oecd": {
       "score": 0.8039386675389697,
       "total_gap": 4.509410646603698,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "29-1216.00",
+    "soc_code": "29-1216",
+    "title": "General Internal Medicine Physicians",
+    "combined_score": 0.6801,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.6801365743275205,
+      "total_gap": 7.3568587904670295,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -9100,6 +9170,77 @@
     "oecd": {
       "score": 0.7471495204209013,
       "total_gap": 5.815561030319271,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "25-2058.00",
+    "soc_code": "25-2058",
+    "title": "Special Education Teachers, Secondary School",
+    "combined_score": 0.7206,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.7206352308019387,
+      "total_gap": 6.425389691555409,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "51-8092.00",
+    "soc_code": "51-8092",
+    "title": "Gas Plant Operators",
+    "combined_score": 0.6783,
+    "combined_level": "high",
+    "aioe": {
+      "score": -0.2982082,
+      "percentile": 0.4367,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9198509266260136,
+      "total_gap": 1.843428687601687,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "19-1029.03",
+    "soc_code": "19-1029",
+    "title": "Geneticists",
+    "combined_score": 0.7237,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.010193,
+      "percentile": 0.7468,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7006764739483233,
+      "total_gap": 6.884441099188564,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "51-4041.00",
+    "soc_code": "51-4041",
+    "title": "Machinists",
+    "combined_score": 0.5486,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -0.8675535,
+      "percentile": 0.2494,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8477912137393466,
+      "total_gap": 3.5008020839950262,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -9686,25 +9827,6 @@
     }
   },
   {
-    "onet_soc_code": "13-1081.01",
-    "soc_code": "13-1081",
-    "title": "Logistics Engineers",
-    "combined_score": 0.8665,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.297303,
-      "percentile": 0.8811,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8518417878301565,
-      "total_gap": 3.4076388799064006,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "11-9199.08",
     "soc_code": "11-9199",
     "title": "Loss Prevention Managers",
@@ -9743,6 +9865,20 @@
     }
   },
   {
+    "onet_soc_code": "29-1224.00",
+    "soc_code": "29-1224",
+    "title": "Radiologists",
+    "combined_score": 0.7171,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.7171384912960495,
+      "total_gap": 6.505814700190864,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "53-7063.00",
     "soc_code": "53-7063",
     "title": "Machine Feeders and Offbearers",
@@ -9757,25 +9893,6 @@
     "oecd": {
       "score": 0.9866518610766958,
       "total_gap": 0.30700719523599673,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "51-4041.00",
-    "soc_code": "51-4041",
-    "title": "Machinists",
-    "combined_score": 0.5486,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -0.8675535,
-      "percentile": 0.2494,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8477912137393466,
-      "total_gap": 3.5008020839950262,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -10363,25 +10480,6 @@
     }
   },
   {
-    "onet_soc_code": "31-9092.00",
-    "soc_code": "31-9092",
-    "title": "Medical Assistants",
-    "combined_score": 0.7356,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.1497917,
-      "percentile": 0.5543,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9169493525479397,
-      "total_gap": 1.910164891397386,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "29-2036.00",
     "soc_code": "29-2036",
     "title": "Medical Dosimetrists",
@@ -10434,13 +10532,23 @@
     }
   },
   {
-    "onet_soc_code": "29-2072.00",
-    "soc_code": "29-2072",
-    "title": "Medical Records Specialists",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
+    "onet_soc_code": "29-2011.00",
+    "soc_code": "29-2011",
+    "title": "Medical and Clinical Laboratory Technologists",
+    "combined_score": 0.7339,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.2818067,
+      "percentile": 0.5801,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8877958001302473,
+      "total_gap": 2.5806965970043123,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
   },
   {
     "onet_soc_code": "19-1042.00",
@@ -10481,6 +10589,25 @@
     }
   },
   {
+    "onet_soc_code": "31-9092.00",
+    "soc_code": "31-9092",
+    "title": "Medical Assistants",
+    "combined_score": 0.7356,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.1497917,
+      "percentile": 0.5543,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9169493525479397,
+      "total_gap": 1.910164891397386,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "31-9094.00",
     "soc_code": "31-9094",
     "title": "Medical Transcriptionists",
@@ -10495,44 +10622,6 @@
     "oecd": {
       "score": 0.99621566558411,
       "total_gap": 0.08703969156546876,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-2012.00",
-    "soc_code": "29-2012",
-    "title": "Medical and Clinical Laboratory Technicians",
-    "combined_score": 0.7084,
-    "combined_level": "high",
-    "aioe": {
-      "score": -0.1273315,
-      "percentile": 0.4832,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9336131535631097,
-      "total_gap": 1.5268974680484764,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-2011.00",
-    "soc_code": "29-2011",
-    "title": "Medical and Clinical Laboratory Technologists",
-    "combined_score": 0.7339,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.2818067,
-      "percentile": 0.5801,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8877958001302473,
-      "total_gap": 2.5806965970043123,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -10675,25 +10764,6 @@
     "oecd": {
       "score": 0.9732863638350165,
       "total_gap": 0.6144136317946192,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "19-1022.00",
-    "soc_code": "19-1022",
-    "title": "Microbiologists",
-    "combined_score": 0.7335,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.6955647,
-      "percentile": 0.6589,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8080634406377964,
-      "total_gap": 4.4145408653306815,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -11196,6 +11266,44 @@
     }
   },
   {
+    "onet_soc_code": "15-2041.01",
+    "soc_code": "15-2041",
+    "title": "Biostatisticians",
+    "combined_score": 0.874,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.382724,
+      "percentile": 0.9522,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7957786056431218,
+      "total_gap": 4.6970920702082,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "29-1126.00",
+    "soc_code": "29-1126",
+    "title": "Respiratory Therapists",
+    "combined_score": 0.6364,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -0.1880507,
+      "percentile": 0.4664,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8064605929583357,
+      "total_gap": 4.451406361958277,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "39-9011.01",
     "soc_code": "39-9011",
     "title": "Nannies",
@@ -11281,20 +11389,6 @@
     "oecd": {
       "score": 0.7385774886375389,
       "total_gap": 6.012717761336604,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "15-1244.00",
-    "soc_code": "15-1244",
-    "title": "Network and Computer Systems Administrators",
-    "combined_score": 0.8998,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.8997679054070812,
-      "total_gap": 2.3053381756371323,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -11589,6 +11683,39 @@
     }
   },
   {
+    "onet_soc_code": "29-1229.02",
+    "soc_code": "29-1229",
+    "title": "Hospitalists",
+    "combined_score": 0.6953,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.6953323131990663,
+      "total_gap": 7.007356796421476,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "29-1141.00",
+    "soc_code": "29-1141",
+    "title": "Registered Nurses",
+    "combined_score": 0.6181,
+    "combined_level": "medium",
+    "aioe": {
+      "score": 0.2294097,
+      "percentile": 0.5724,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.6637736562451897,
+      "total_gap": 7.733205906360638,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "29-1218.00",
     "soc_code": "29-1218",
     "title": "Obstetricians and Gynecologists",
@@ -11773,25 +11900,6 @@
     }
   },
   {
-    "onet_soc_code": "15-2031.00",
-    "soc_code": "15-2031",
-    "title": "Operations Research Analysts",
-    "combined_score": 0.8897,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.40002,
-      "percentile": 0.9612,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8181631018648882,
-      "total_gap": 4.182248657107571,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "51-9083.00",
     "soc_code": "51-9083",
     "title": "Ophthalmic Laboratory Technicians",
@@ -11859,6 +11967,25 @@
       "score": 0.5409977565808559,
       "total_gap": 10.557051598640314,
       "level": "medium",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "15-2031.00",
+    "soc_code": "15-2031",
+    "title": "Operations Research Analysts",
+    "combined_score": 0.8897,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.40002,
+      "percentile": 0.9612,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8181631018648882,
+      "total_gap": 4.182248657107571,
+      "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
   },
@@ -12033,6 +12160,67 @@
     }
   },
   {
+    "onet_soc_code": "15-1242.00",
+    "soc_code": "15-1242",
+    "title": "Database Administrators",
+    "combined_score": 0.9349,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.9349263849498384,
+      "total_gap": 1.4966931461537172,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "15-1232.00",
+    "soc_code": "15-1232",
+    "title": "Computer User Support Specialists",
+    "combined_score": 0.9084,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.9083550674150939,
+      "total_gap": 2.1078334494528406,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "15-1254.00",
+    "soc_code": "15-1254",
+    "title": "Web Developers",
+    "combined_score": 0.9264,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.926379655315387,
+      "total_gap": 1.6932679277460991,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "19-3093.00",
+    "soc_code": "19-3093",
+    "title": "Historians",
+    "combined_score": 0.7777,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.098921,
+      "percentile": 0.7817,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7736255372393259,
+      "total_gap": 5.206612643495504,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "51-9111.00",
     "soc_code": "51-9111",
     "title": "Packaging and Filling Machine Operators and Tenders",
@@ -12166,15 +12354,6 @@
     }
   },
   {
-    "onet_soc_code": "29-2043.00",
-    "soc_code": "29-2043",
-    "title": "Paramedics",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
-  },
-  {
     "onet_soc_code": "19-1031.03",
     "soc_code": "19-1031",
     "title": "Park Naturalists",
@@ -12227,25 +12406,6 @@
     "oecd": {
       "score": 0.9372568500532455,
       "total_gap": 1.443092448775353,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "41-2022.00",
-    "soc_code": "41-2022",
-    "title": "Parts Salespersons",
-    "combined_score": 0.715,
-    "combined_level": "high",
-    "aioe": {
-      "score": -0.1184909,
-      "percentile": 0.4884,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9415052691813041,
-      "total_gap": 1.3453788088300058,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -12562,25 +12722,6 @@
     }
   },
   {
-    "onet_soc_code": "29-2052.00",
-    "soc_code": "29-2052",
-    "title": "Pharmacy Technicians",
-    "combined_score": 0.7399,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.0070256,
-      "percentile": 0.5142,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9655770764434002,
-      "total_gap": 0.7917272418017944,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "25-1126.00",
     "soc_code": "25-1126",
     "title": "Philosophy and Religion Teachers, Postsecondary",
@@ -12614,6 +12755,25 @@
     "oecd": {
       "score": 0.8981228173516039,
       "total_gap": 2.343175200913109,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "43-2021.00",
+    "soc_code": "43-2021",
+    "title": "Telephone Operators",
+    "combined_score": 0.8687,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.019712,
+      "percentile": 0.7519,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9854900438033063,
+      "total_gap": 0.33372899252395527,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -13102,25 +13262,6 @@
     }
   },
   {
-    "onet_soc_code": "43-5052.00",
-    "soc_code": "43-5052",
-    "title": "Postal Service Mail Carriers",
-    "combined_score": 0.5631,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -1.064715,
-      "percentile": 0.1693,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9568186601741983,
-      "total_gap": 0.9931708159934409,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "43-5053.00",
     "soc_code": "43-5053",
     "title": "Postal Service Mail Sorters, Processors, and Processing Machine Operators",
@@ -13239,6 +13380,25 @@
     "oecd": {
       "score": 0.9063917050384419,
       "total_gap": 2.152990784115836,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "25-2051.00",
+    "soc_code": "25-2051",
+    "title": "Special Education Teachers, Preschool",
+    "combined_score": 0.661,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.3750564,
+      "percentile": 0.5995,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.7225686879040363,
+      "total_gap": 6.380920178207166,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -13749,20 +13909,58 @@
     }
   },
   {
-    "onet_soc_code": "19-4099.01",
-    "soc_code": "19-4099",
-    "title": "Quality Control Analysts",
-    "combined_score": 0.7682,
+    "onet_soc_code": "19-2031.00",
+    "soc_code": "19-2031",
+    "title": "Chemists",
+    "combined_score": 0.7327,
     "combined_level": "high",
     "aioe": {
-      "score": 0.4501044,
-      "percentile": 0.6098,
+      "score": 0.5011251,
+      "percentile": 0.6214,
       "level": "medium",
       "source": "Felten, Raj, and Seamans AIOE"
     },
     "oecd": {
-      "score": 0.9266434277440597,
-      "total_gap": 1.6872011618866267,
+      "score": 0.8439850109855596,
+      "total_gap": 3.5883447473321297,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "17-2112.00",
+    "soc_code": "17-2112",
+    "title": "Industrial Engineers",
+    "combined_score": 0.8444,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.13787,
+      "percentile": 0.7984,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8904765211631205,
+      "total_gap": 2.5190400132482296,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "19-1022.00",
+    "soc_code": "19-1022",
+    "title": "Microbiologists",
+    "combined_score": 0.7335,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.6955647,
+      "percentile": 0.6589,
+      "level": "medium",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8080634406377964,
+      "total_gap": 4.4145408653306815,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -13782,6 +13980,34 @@
     "oecd": {
       "score": 0.7988846040519175,
       "total_gap": 4.6256541068058965,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "29-2072.00",
+    "soc_code": "29-2072",
+    "title": "Medical Records Specialists",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
+  },
+  {
+    "onet_soc_code": "49-3092.00",
+    "soc_code": "49-3092",
+    "title": "Recreational Vehicle Service Technicians",
+    "combined_score": 0.53,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -0.9244052,
+      "percentile": 0.2235,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.8365404630670201,
+      "total_gap": 3.7595693494585376,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -13858,20 +14084,6 @@
     "oecd": {
       "score": 0.8791726137903682,
       "total_gap": 2.7790298828215327,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-1224.00",
-    "soc_code": "29-1224",
-    "title": "Radiologists",
-    "combined_score": 0.7171,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.7171384912960495,
-      "total_gap": 6.505814700190864,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -14109,25 +14321,6 @@
     }
   },
   {
-    "onet_soc_code": "49-3092.00",
-    "soc_code": "49-3092",
-    "title": "Recreational Vehicle Service Technicians",
-    "combined_score": 0.53,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -0.9244052,
-      "percentile": 0.2235,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8365404630670201,
-      "total_gap": 3.7595693494585376,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "53-1042.01",
     "soc_code": "53-1042",
     "title": "Recycling Coordinators",
@@ -14194,44 +14387,6 @@
     "oecd": {
       "score": 0.8916547379506485,
       "total_gap": 2.491941027135084,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-1141.00",
-    "soc_code": "29-1141",
-    "title": "Registered Nurses",
-    "combined_score": 0.6181,
-    "combined_level": "medium",
-    "aioe": {
-      "score": 0.2294097,
-      "percentile": 0.5724,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.6637736562451897,
-      "total_gap": 7.733205906360638,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "11-9199.01",
-    "soc_code": "11-9199",
-    "title": "Regulatory Affairs Managers",
-    "combined_score": 0.7393,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.9646872,
-      "percentile": 0.7351,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7434998158975645,
-      "total_gap": 5.899504234356016,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -14374,25 +14529,6 @@
     "oecd": {
       "score": 0.8259823911690449,
       "total_gap": 4.002405003111967,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "29-1126.00",
-    "soc_code": "29-1126",
-    "title": "Respiratory Therapists",
-    "combined_score": 0.6364,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -0.1880507,
-      "percentile": 0.4664,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8064605929583357,
-      "total_gap": 4.451406361958277,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -14600,6 +14736,29 @@
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
+  },
+  {
+    "onet_soc_code": "25-3041.00",
+    "soc_code": "25-3041",
+    "title": "Tutors",
+    "combined_score": 0.8424,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.8423675667972352,
+      "total_gap": 3.6255459636635905,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "15-1252.00",
+    "soc_code": "15-1252",
+    "title": "Software Developers",
+    "combined_score": null,
+    "combined_level": null,
+    "aioe": null,
+    "oecd": null
   },
   {
     "onet_soc_code": "53-5011.00",
@@ -14864,34 +15023,6 @@
       "source": "Felten, Raj, and Seamans AIOE"
     },
     "oecd": null
-  },
-  {
-    "onet_soc_code": "11-3013.01",
-    "soc_code": "11-3013",
-    "title": "Security Managers",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
-  },
-  {
-    "onet_soc_code": "49-2098.00",
-    "soc_code": "49-2098",
-    "title": "Security and Fire Alarm Systems Installers",
-    "combined_score": 0.5953,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -0.6926484,
-      "percentile": 0.3165,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8741993709476494,
-      "total_gap": 2.893414468204064,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
   },
   {
     "onet_soc_code": "47-4091.00",
@@ -15245,25 +15376,6 @@
     }
   },
   {
-    "onet_soc_code": "19-4061.00",
-    "soc_code": "19-4061",
-    "title": "Social Science Research Assistants",
-    "combined_score": 0.883,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.204652,
-      "percentile": 0.8282,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9378302080730117,
-      "total_gap": 1.4299052143207334,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "25-1069.00",
     "soc_code": "25-1069",
     "title": "Social Sciences Teachers, Postsecondary, All Other",
@@ -15391,15 +15503,6 @@
     }
   },
   {
-    "onet_soc_code": "15-1252.00",
-    "soc_code": "15-1252",
-    "title": "Software Developers",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
-  },
-  {
     "onet_soc_code": "15-1253.00",
     "soc_code": "15-1253",
     "title": "Software Quality Assurance Analysts and Testers",
@@ -15452,25 +15555,6 @@
     }
   },
   {
-    "onet_soc_code": "17-2199.11",
-    "soc_code": "17-2199",
-    "title": "Solar Energy Systems Engineers",
-    "combined_score": 0.8067,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.787566,
-      "percentile": 0.6886,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9248715731435426,
-      "total_gap": 1.7279538176985199,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "47-2231.00",
     "soc_code": "47-2231",
     "title": "Solar Photovoltaic Installers",
@@ -15485,6 +15569,25 @@
     "oecd": {
       "score": 0.8503295654425796,
       "total_gap": 3.4424199948206677,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "17-2199.11",
+    "soc_code": "17-2199",
+    "title": "Solar Energy Systems Engineers",
+    "combined_score": 0.8067,
+    "combined_level": "high",
+    "aioe": {
+      "score": 0.787566,
+      "percentile": 0.6886,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9248715731435426,
+      "total_gap": 1.7279538176985199,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -15575,24 +15678,6 @@
     "oecd": null
   },
   {
-    "onet_soc_code": "25-2056.00",
-    "soc_code": "25-2056",
-    "title": "Special Education Teachers, Elementary School",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
-  },
-  {
-    "onet_soc_code": "25-2055.00",
-    "soc_code": "25-2055",
-    "title": "Special Education Teachers, Kindergarten",
-    "combined_score": null,
-    "combined_level": null,
-    "aioe": null,
-    "oecd": null
-  },
-  {
     "onet_soc_code": "25-2057.00",
     "soc_code": "25-2057",
     "title": "Special Education Teachers, Middle School",
@@ -15602,39 +15687,6 @@
     "oecd": {
       "score": 0.7013015215811522,
       "total_gap": 6.870065003633499,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "25-2051.00",
-    "soc_code": "25-2051",
-    "title": "Special Education Teachers, Preschool",
-    "combined_score": 0.661,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.3750564,
-      "percentile": 0.5995,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.7225686879040363,
-      "total_gap": 6.380920178207166,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "25-2058.00",
-    "soc_code": "25-2058",
-    "title": "Special Education Teachers, Secondary School",
-    "combined_score": 0.7206,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.7206352308019387,
-      "total_gap": 6.425389691555409,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -16003,25 +16055,6 @@
     }
   },
   {
-    "onet_soc_code": "17-3031.00",
-    "soc_code": "17-3031",
-    "title": "Surveying and Mapping Technicians",
-    "combined_score": 0.7418,
-    "combined_level": "high",
-    "aioe": {
-      "score": 0.0852324,
-      "percentile": 0.5375,
-      "level": "medium",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.946147752794213,
-      "total_gap": 1.2386016857331015,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "17-1022.00",
     "soc_code": "17-1022",
     "title": "Surveyors",
@@ -16371,25 +16404,6 @@
     }
   },
   {
-    "onet_soc_code": "43-2021.00",
-    "soc_code": "43-2021",
-    "title": "Telephone Operators",
-    "combined_score": 0.8687,
-    "combined_level": "high",
-    "aioe": {
-      "score": 1.019712,
-      "percentile": 0.7519,
-      "level": "high",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.9854900438033063,
-      "total_gap": 0.33372899252395527,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
     "onet_soc_code": "43-3071.00",
     "soc_code": "43-3071",
     "title": "Tellers",
@@ -16550,25 +16564,6 @@
     "oecd": {
       "score": 0.8868342066100712,
       "total_gap": 2.6028132479683634,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "51-9197.00",
-    "soc_code": "51-9197",
-    "title": "Tire Builders",
-    "combined_score": 0.4981,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -1.610915,
-      "percentile": 0.0452,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.950929689570702,
-      "total_gap": 1.1286171398738531,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -16944,15 +16939,39 @@
     }
   },
   {
-    "onet_soc_code": "25-3041.00",
-    "soc_code": "25-3041",
-    "title": "Tutors",
-    "combined_score": 0.8424,
-    "combined_level": "high",
-    "aioe": null,
+    "onet_soc_code": "43-5052.00",
+    "soc_code": "43-5052",
+    "title": "Postal Service Mail Carriers",
+    "combined_score": 0.5631,
+    "combined_level": "medium",
+    "aioe": {
+      "score": -1.064715,
+      "percentile": 0.1693,
+      "level": "low",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
     "oecd": {
-      "score": 0.8423675667972352,
-      "total_gap": 3.6255459636635905,
+      "score": 0.9568186601741983,
+      "total_gap": 0.9931708159934409,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
+    "onet_soc_code": "19-4061.00",
+    "soc_code": "19-4061",
+    "title": "Social Science Research Assistants",
+    "combined_score": 0.883,
+    "combined_level": "high",
+    "aioe": {
+      "score": 1.204652,
+      "percentile": 0.8282,
+      "level": "high",
+      "source": "Felten, Raj, and Seamans AIOE"
+    },
+    "oecd": {
+      "score": 0.9378302080730117,
+      "total_gap": 1.4299052143207334,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }
@@ -16984,25 +17003,6 @@
     "combined_level": null,
     "aioe": null,
     "oecd": null
-  },
-  {
-    "onet_soc_code": "51-6093.00",
-    "soc_code": "51-6093",
-    "title": "Upholsterers",
-    "combined_score": 0.4772,
-    "combined_level": "medium",
-    "aioe": {
-      "score": -1.313735,
-      "percentile": 0.0891,
-      "level": "low",
-      "source": "Felten, Raj, and Seamans AIOE"
-    },
-    "oecd": {
-      "score": 0.8653184232548152,
-      "total_gap": 3.097676265139249,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
   },
   {
     "onet_soc_code": "19-3051.00",
@@ -17147,6 +17147,20 @@
     }
   },
   {
+    "onet_soc_code": "15-1244.00",
+    "soc_code": "15-1244",
+    "title": "Network and Computer Systems Administrators",
+    "combined_score": 0.8998,
+    "combined_level": "high",
+    "aioe": null,
+    "oecd": {
+      "score": 0.8997679054070812,
+      "total_gap": 2.3053381756371323,
+      "level": "high",
+      "source": "OECD AI Capability Gap Index reversed normalized score"
+    }
+  },
+  {
     "onet_soc_code": "35-3031.00",
     "soc_code": "35-3031",
     "title": "Waiters and Waitresses",
@@ -17270,20 +17284,6 @@
     "oecd": {
       "score": 0.9300608970026264,
       "total_gap": 1.6085993689395934,
-      "level": "high",
-      "source": "OECD AI Capability Gap Index reversed normalized score"
-    }
-  },
-  {
-    "onet_soc_code": "15-1254.00",
-    "soc_code": "15-1254",
-    "title": "Web Developers",
-    "combined_score": 0.9264,
-    "combined_level": "high",
-    "aioe": null,
-    "oecd": {
-      "score": 0.926379655315387,
-      "total_gap": 1.6932679277460991,
       "level": "high",
       "source": "OECD AI Capability Gap Index reversed normalized score"
     }

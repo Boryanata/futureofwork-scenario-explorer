@@ -8,7 +8,17 @@ export type OccupationProfile = {
   onet_soc_code: string;
   soc_code: string;
   title: string;
+  onet_title: string;
+  display_title: string;
+  display_title_source: "canonical" | "short_title" | "my_next_move";
   description: string;
+  job_family_code: string;
+  job_family: string;
+  job_family_display: string;
+  subfamily_code: string;
+  subfamily: string;
+  search_aliases: string[];
+  search_text: string;
   job_zone: {
     zone: string;
     name: string;

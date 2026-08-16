@@ -1,13 +1,17 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   BookOpen,
   BriefcaseBusiness,
   FileText,
   Gauge,
   GraduationCap,
+  Layers3,
   Lock,
+  MoveHorizontal,
   Search,
   SlidersHorizontal,
+  UsersRound,
+  Workflow,
 } from "lucide-react";
 import {
   appEvidenceReferences,
@@ -23,6 +27,7 @@ import type {
   OutcomeResult,
   ScenarioContext,
   ScenarioResult,
+  ScenarioRule,
 } from "./domain/types";
 
 type Preset = {
@@ -60,8 +65,11 @@ type TaskAssignment = {
   rationale: string;
 };
 
-type OrganizationControlContext = {
-  helper: string;
+type OrganizationalContextCue = {
+  level: "supported" | "mixed" | "constrained";
+  label: "More supported" | "Mixed support" | "More constrained";
+  arrow: "↑" | "→" | "↓";
+  explanation: string;
 };
 
 type ComparisonSnapshot = {
@@ -74,6 +82,32 @@ type ComparisonSnapshot = {
   organizationLabel: string;
   workDesign: WorkDesign;
   result: ScenarioResult;
+};
+
+type OccupationSearchMatch = {
+  item: OccupationProfile;
+  tier: number;
+  matchType: "occupation" | "job_title";
+  matchedAlias?: string;
+};
+
+type SearchResultSection = {
+  heading?: string;
+  familyCode?: string;
+  subfamilyCode?: string;
+  items: OccupationSearchMatch[];
+};
+
+type OccupationFamily = {
+  code: string;
+  label: string;
+  items: OccupationProfile[];
+};
+
+type OccupationSubfamily = {
+  code: string;
+  label: string;
+  items: OccupationProfile[];
 };
 
 type ComparativeCase = {
@@ -220,11 +254,79 @@ const institutionalControls: ControlConfig[] = [
   { field: "employment_protection", label: "Employment protection", shortLabel: "Employment protection", options: ["weak", "moderate", "strong"] },
 ];
 
+const institutionalDetailGroups = [
+  {
+    title: "Governance and rights",
+    fields: [
+      "ai_governance",
+      "algorithmic_transparency",
+      "worker_information_rights",
+      "data_protection",
+      "anti_discrimination_rules",
+    ],
+  },
+  {
+    title: "Worker power and protection",
+    fields: ["collective_bargaining", "employment_protection", "social_protection"],
+  },
+  {
+    title: "Adaptation and workforce capacity",
+    fields: ["workforce_development", "employer_retraining_incentives", "active_labor_market_policy"],
+  },
+];
+
+const institutionalDimensionCopy: Record<string, { explanation: string; why?: string }> = {
+  ai_governance: {
+    explanation: "Rules and oversight shape how AI can be introduced and used.",
+    why: "Governance sets the conditions under which organizations adopt and deploy AI.",
+  },
+  algorithmic_transparency: {
+    explanation: "People can see or understand when automated systems are being used and how decisions are made.",
+    why: "Transparency makes it easier to question, improve, or contest AI-driven decisions.",
+  },
+  worker_information_rights: {
+    explanation: "Workers have access to information about technologies that affect their jobs or working conditions.",
+    why: "Information rights help workers and representatives respond before changes are locked in.",
+  },
+  data_protection: {
+    explanation: "Limits exist on how worker data can be collected, used, shared, and stored.",
+    why: "Data protections reduce the risk of excessive monitoring or misuse of personal information.",
+  },
+  anti_discrimination_rules: {
+    explanation: "Rules aim to prevent automated systems from producing unfair or biased outcomes.",
+    why: "Anti-discrimination safeguards matter when AI affects hiring, scheduling, evaluation, or advancement.",
+  },
+  collective_bargaining: {
+    explanation: "Workers have an organized channel to negotiate over workplace change.",
+    why: "Worker voice can affect how the costs and gains of technological change are negotiated.",
+  },
+  employment_protection: {
+    explanation: "Rules shape how easily jobs can be changed, reduced, or ended.",
+    why: "Employment protection can slow abrupt displacement and create space for transition planning.",
+  },
+  social_protection: {
+    explanation: "Income support and public benefits help workers manage employment disruption.",
+    why: "Stronger protections can reduce the individual risk of moving between jobs or training pathways.",
+  },
+  workforce_development: {
+    explanation: "Publicly supported training and transition infrastructure helps workers build new skills.",
+    why: "Stronger training systems increase the capacity to respond to changing skill and employment demands.",
+  },
+  employer_retraining_incentives: {
+    explanation: "Employers face incentives or expectations to invest in retraining workers.",
+    why: "Retraining incentives can make adaptation more likely to happen inside jobs, not only after displacement.",
+  },
+  active_labor_market_policy: {
+    explanation: "Public programs help workers find work, retrain, or move into growing roles.",
+    why: "Active labor-market support can improve mobility when work changes.",
+  },
+};
+
 const organizationControls: ControlConfig[] = [
   { field: "deployment_strategy", label: "Deployment strategy", options: ["automation_first", "hybrid", "augmentation"] },
   { field: "retraining_commitment", label: "Retraining / role transition", options: ["none", "selective", "broad"] },
   { field: "worker_participation", label: "Worker participation in work redesign", options: ["low", "medium", "high"] },
-  { field: "worker_consultation_rights", label: "Consultation rights", options: ["weak", "moderate", "strong"] },
+  { field: "worker_consultation_rights", label: "Worker consultation", options: ["weak", "moderate", "strong"] },
   { field: "human_oversight", label: "Human oversight", options: ["low", "medium", "high", "required"] },
   { field: "task_allocation", label: "Task allocation", options: ["unclear", "clear"] },
   { field: "task_meaning", label: "Task meaning", options: ["low", "high"] },
@@ -232,6 +334,27 @@ const organizationControls: ControlConfig[] = [
   { field: "job_redesign", label: "Job redesign", options: ["inactive", "active"] },
   { field: "ai_adoption_stage", label: "AI adoption stage", options: ["post_deployment", "pre_deployment"] },
 ];
+
+const additionalOrganizationFields = [
+  "worker_consultation_rights",
+  "human_oversight",
+  "skill_investment_horizon",
+  "job_redesign",
+  "ai_adoption_stage",
+] as const;
+
+const organizationalDimensionCopy: Record<string, string> = {
+  worker_consultation_rights:
+    "Whether workers are informed and consulted before or during AI-related changes to work, monitoring, or roles.",
+  human_oversight:
+    "How much human review, judgment, or decision-making is retained when AI is used.",
+  skill_investment_horizon:
+    "Whether employer skill investment focuses on immediate deployment needs or workers' longer-term development.",
+  job_redesign:
+    "Whether roles and responsibilities are deliberately reorganized as AI is introduced.",
+  ai_adoption_stage:
+    "Whether workforce considerations enter before deployment or mainly after AI has already been introduced.",
+};
 
 const comparativeCases: ComparativeCase[] = [
   {
@@ -329,8 +452,184 @@ function preparationLabel(occupation: OccupationProfile): string {
   return occupation.job_zone.name.replace(/^Job Zone\s(?:[\d-]+|[A-Za-z]+):\s*/, "");
 }
 
+function occupationDisplayTitle(occupation: OccupationProfile): string {
+  return occupation.display_title || occupation.title;
+}
+
 function findOccupation(defaultTitle: string): OccupationProfile {
-  return appOccupations.find((occupation) => occupation.title === defaultTitle) ?? appOccupations[0];
+  const normalizedDefault = normalizeSearchValue(defaultTitle);
+  return (
+    appOccupations.find(
+      (occupation) =>
+        normalizeSearchValue(occupationDisplayTitle(occupation)) === normalizedDefault ||
+        normalizeSearchValue(occupation.title) === normalizedDefault,
+    ) ?? appOccupations[0]
+  );
+}
+
+function normalizeSearchValue(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^\p{L}\p{N}\s/-]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function searchTokens(value: string): string[] {
+  return normalizeSearchValue(value)
+    .split(/[\s/-]+/)
+    .filter(Boolean);
+}
+
+function tokenPrefixMatch(value: string, query: string): boolean {
+  const valueTokens = searchTokens(value);
+  const queryTokens = searchTokens(query);
+  if (!queryTokens.length) return false;
+
+  let valueIndex = 0;
+  for (const queryToken of queryTokens) {
+    let found = false;
+    while (valueIndex < valueTokens.length) {
+      if (valueTokens[valueIndex].startsWith(queryToken)) {
+        found = true;
+        valueIndex += 1;
+        break;
+      }
+      valueIndex += 1;
+    }
+    if (!found) return false;
+  }
+
+  return true;
+}
+
+function directOccupationMatchTier(occupation: OccupationProfile, query: string): number | null {
+  const normalizedDisplayTitle = normalizeSearchValue(occupationDisplayTitle(occupation));
+  const normalizedCanonicalTitle = normalizeSearchValue(occupation.title);
+
+  if (normalizedDisplayTitle === query) return 1;
+  if (normalizedCanonicalTitle === query) return 2;
+
+  if (normalizedDisplayTitle.startsWith(query)) return 3;
+  if (normalizedCanonicalTitle.startsWith(query)) return 4;
+
+  if (tokenPrefixMatch(normalizedDisplayTitle, query)) return 5;
+  if (tokenPrefixMatch(normalizedCanonicalTitle, query)) return 6;
+
+  return null;
+}
+
+function bestAliasMatch(
+  occupation: OccupationProfile,
+  query: string,
+): { alias: string; tier: number } | null {
+  if (!query) return null;
+
+  const matches = occupation.search_aliases
+    .map((alias, index) => ({ alias, index, normalized: normalizeSearchValue(alias) }))
+    .map((match) => {
+      let tier: number | null = null;
+      if (match.normalized === query) tier = 1;
+      else if (match.normalized.startsWith(query)) tier = 2;
+      else if (tokenPrefixMatch(match.normalized, query)) tier = 3;
+      return { ...match, tier };
+    })
+    .filter((match): match is { alias: string; index: number; normalized: string; tier: number } => match.tier !== null)
+    .sort((a, b) => a.tier - b.tier || a.normalized.length - b.normalized.length || a.index - b.index);
+
+  const match = matches[0];
+  return match ? { alias: match.alias, tier: match.tier } : null;
+}
+
+function buildSearchResultSections(results: OccupationSearchMatch[]): SearchResultSection[] {
+  if (results.length <= 8) {
+    return [{ items: results }];
+  }
+
+  const families = new Set(
+    results.map(({ item }) => item.job_family_code || item.job_family_display),
+  );
+  const multipleFamilies = families.size > 1;
+  const sections = new Map<string, SearchResultSection>();
+
+  for (const match of results) {
+    const item = match.item;
+    const familyLabel = item.job_family_display || item.job_family || "Other occupations";
+    const subfamilyLabel = item.subfamily || familyLabel;
+    const key = `${item.job_family_code}|${item.subfamily_code}|${subfamilyLabel}`;
+    const heading =
+      multipleFamilies && subfamilyLabel !== familyLabel
+        ? `${familyLabel} · ${subfamilyLabel}`
+        : subfamilyLabel;
+
+    const current = sections.get(key);
+    if (current) {
+      current.items.push(match);
+    } else {
+      sections.set(key, {
+        heading,
+        familyCode: item.job_family_code,
+        subfamilyCode: item.subfamily_code,
+        items: [match],
+      });
+    }
+  }
+
+  return Array.from(sections.values()).sort((a, b) => {
+    const countOrder = b.items.length - a.items.length;
+    if (countOrder !== 0) return countOrder;
+
+    const familyOrder = (a.familyCode ?? "").localeCompare(b.familyCode ?? "", undefined, { numeric: true });
+    if (familyOrder !== 0) return familyOrder;
+
+    const subfamilyOrder = (a.subfamilyCode ?? "").localeCompare(b.subfamilyCode ?? "", undefined, { numeric: true });
+    if (subfamilyOrder !== 0) return subfamilyOrder;
+
+    return (a.heading ?? "").localeCompare(b.heading ?? "");
+  });
+}
+
+function buildOccupationFamilies(occupations: OccupationProfile[]): OccupationFamily[] {
+  const families = new Map<string, OccupationFamily>();
+
+  for (const occupation of occupations) {
+    const code = occupation.job_family_code || "other";
+    const label = occupation.job_family_display || occupation.job_family || "Other occupations";
+    const current = families.get(code);
+    if (current) {
+      current.items.push(occupation);
+    } else {
+      families.set(code, { code, label, items: [occupation] });
+    }
+  }
+
+  return Array.from(families.values())
+    .map((family) => ({
+      ...family,
+      items: [...family.items].sort((a, b) =>
+        occupationDisplayTitle(a).localeCompare(occupationDisplayTitle(b)),
+      ),
+    }))
+    .sort((a, b) => a.code.localeCompare(b.code));
+}
+
+function buildOccupationSubfamilies(family: OccupationFamily): OccupationSubfamily[] {
+  const subfamilies = new Map<string, OccupationSubfamily>();
+
+  for (const occupation of family.items) {
+    const code = occupation.subfamily_code || occupation.job_family_code || "other";
+    const label = occupation.subfamily || family.label;
+    const current = subfamilies.get(code);
+    if (current) {
+      current.items.push(occupation);
+    } else {
+      subfamilies.set(code, { code, label, items: [occupation] });
+    }
+  }
+
+  return Array.from(subfamilies.values()).sort((a, b) => a.code.localeCompare(b.code));
 }
 
 function taskAffinity(task: WorkTask): { routine: number; human: number; oversight: number } {
@@ -557,71 +856,190 @@ function buildScenarioTaskAssignments(
     .map((task) => scenarioTaskAssignment(task, institutionalValues, organizationalValues));
 }
 
-function organizationControlContext(occupation: OccupationProfile, field: string): OrganizationControlContext {
+function organizationDecisionCopy(
+  occupation: OccupationProfile,
+  field: string,
+  value: string,
+): string {
+  const occupationTitle = occupationDisplayTitle(occupation);
+
   if (field === "deployment_strategy") {
-    return {
-      helper: `For ${occupation.title}, this shapes whether AI is used primarily to substitute parts of the work or to support human-led tasks and workflows.`,
-    };
+    if (value === "automation_first") {
+      return `The employer prioritizes substituting automatable parts of ${occupationTitle} work rather than redesigning roles around AI support.`;
+    }
+    if (value === "hybrid") {
+      return `The employer combines targeted automation with redesign of ${occupationTitle} workflows around human-AI collaboration.`;
+    }
+    return `AI is used primarily to support ${occupationTitle} work while retaining and redesigning human responsibilities.`;
   }
 
   if (field === "retraining_commitment") {
-    return {
-      helper: `For ${occupation.title}, this shapes whether workers are prepared for redesigned responsibilities, adjacent roles, or new ways of working as tasks change.`,
-    };
+    if (value === "none") {
+      return `There is no planned investment in preparing ${occupationTitle} workers for changing responsibilities or adjacent roles.`;
+    }
+    if (value === "selective") {
+      return `Training is targeted to ${occupationTitle} workers or responsibilities most directly affected by AI deployment.`;
+    }
+    return `The employer builds broader retraining and role-transition pathways for ${occupationTitle} workers alongside AI deployment.`;
   }
 
   if (field === "worker_participation") {
+    if (value === "low") {
+      return `Work redesign is primarily management-led, with limited ${occupationTitle} worker influence over how AI changes everyday work.`;
+    }
+    if (value === "medium") {
+      return `${occupationTitle} workers are consulted about changes to workflows, responsibilities, and the introduction of AI.`;
+    }
+    return `${occupationTitle} workers participate directly in decisions about how AI changes workflows and responsibilities.`;
+  }
+
+  return `This choice changes how ${occupationTitle} work is organized under the scenario.`;
+}
+
+
+function institutionalLevel(
+  field: string,
+  values: Record<string, string | boolean>,
+): number {
+  const control = institutionalControls.find((item) => item.field === field);
+  if (!control) return 0.5;
+
+  const value = String(values[field]);
+  const index = control.options.indexOf(value);
+  if (index < 0 || control.options.length <= 1) return 0.5;
+
+  return index / (control.options.length - 1);
+}
+
+function organizationalContextCue(
+  presetId: string,
+  institutionalValues: Record<string, string | boolean>,
+): OrganizationalContextCue {
+  let support = 0.5;
+
+  if (presetId === "automation_oriented") {
+    const constraints = [
+      institutionalLevel("ai_governance", institutionalValues),
+      institutionalLevel("collective_bargaining", institutionalValues),
+      institutionalLevel("worker_information_rights", institutionalValues),
+      institutionalLevel("employment_protection", institutionalValues),
+    ];
+    support = 1 - constraints.reduce((sum, value) => sum + value, 0) / constraints.length;
+
+    if (support >= 0.66) {
+      return {
+        level: "supported",
+        label: "More supported",
+        arrow: "↑",
+        explanation:
+          "Limited bargaining, information rights, and employment protections leave employers more room to pursue a substitution-first strategy.",
+      };
+    }
+
+    if (support <= 0.34) {
+      return {
+        level: "constrained",
+        label: "More constrained",
+        arrow: "↓",
+        explanation:
+          "Stronger bargaining, worker information rights, and employment protection place more constraints on a substitution-first strategy.",
+      };
+    }
+
     return {
-      helper: `For ${occupation.title}, this shapes how much workers influence workflow design, task allocation, and the introduction of AI into everyday work.`,
+      level: "mixed",
+      label: "Mixed support",
+      arrow: "→",
+      explanation:
+        "Some institutional constraints temper employer discretion, but they do not rule out a substitution-first strategy.",
     };
   }
 
-  if (field === "worker_consultation_rights") {
+  if (presetId === "hybrid_redesign") {
+    const supports = [
+      institutionalLevel("workforce_development", institutionalValues),
+      institutionalLevel("employer_retraining_incentives", institutionalValues),
+      institutionalLevel("worker_information_rights", institutionalValues),
+    ];
+    support = supports.reduce((sum, value) => sum + value, 0) / supports.length;
+
+    if (support >= 0.66) {
+      return {
+        level: "supported",
+        label: "More supported",
+        arrow: "↑",
+        explanation:
+          "Training infrastructure, retraining incentives, and worker information rights make coordinated work redesign easier to sustain.",
+      };
+    }
+
+    if (support <= 0.34) {
+      return {
+        level: "constrained",
+        label: "More constrained",
+        arrow: "↓",
+        explanation:
+          "Limited training infrastructure and retraining support make coordinated work redesign harder to sustain.",
+      };
+    }
+
     return {
-      helper: `For ${occupation.title}, this shapes the process around technology introduction, including notice, task reassignment, monitoring, and oversight.`,
+      level: "mixed",
+      label: "Mixed support",
+      arrow: "→",
+      explanation:
+        "Some supports for retraining and redesign are present, while implementation still depends heavily on employer capacity.",
+    };
+  }
+
+  const supports = [
+    institutionalLevel("workforce_development", institutionalValues),
+    institutionalLevel("employer_retraining_incentives", institutionalValues),
+    institutionalLevel("active_labor_market_policy", institutionalValues),
+    institutionalLevel("collective_bargaining", institutionalValues),
+  ];
+  support = supports.reduce((sum, value) => sum + value, 0) / supports.length;
+
+  if (support >= 0.66) {
+    return {
+      level: "supported",
+      label: "More supported",
+      arrow: "↑",
+      explanation:
+        "Training infrastructure, worker voice, and transition support make redeployment and role redesign more feasible.",
+    };
+  }
+
+  if (support <= 0.34) {
+    return {
+      level: "constrained",
+      label: "More constrained",
+      arrow: "↓",
+      explanation:
+        "Limited training infrastructure, worker voice, and transition support make redeployment harder to sustain.",
     };
   }
 
   return {
-    helper: `This choice changes how ${occupation.title} work is organized under the scenario.`,
+    level: "mixed",
+    label: "Mixed support",
+    arrow: "→",
+    explanation:
+      "Some institutional supports for retraining and worker voice are present, but redeployment remains uneven.",
   };
 }
 
-function organizationalEnvironmentNote(
-  presetId: string,
-  institutionalValues: Record<string, string | boolean>,
-): string {
-  const governance = String(institutionalValues.ai_governance);
-  const bargaining = String(institutionalValues.collective_bargaining);
-  const workforce = String(institutionalValues.workforce_development);
-  const retraining = String(institutionalValues.employer_retraining_incentives);
-  const employmentProtection = String(institutionalValues.employment_protection);
-  const informationRights = String(institutionalValues.worker_information_rights);
+function organizationPresetMatchScore(preset: Preset, values: Record<string, string | boolean>): number {
+  return ["deployment_strategy", "retraining_commitment", "worker_participation"].reduce(
+    (score, field) => score + (preset.values[field] === values[field] ? 1 : 0),
+    0,
+  );
+}
 
-  if (presetId === "automation_oriented") {
-    if (governance === "weak" && bargaining === "weak" && employmentProtection === "weak") {
-      return "Relatively few institutional constraints limit this strategy.";
-    }
-    if (["co_governed", "rights_based"].includes(governance) || bargaining === "strong" || employmentProtection === "strong") {
-      return "This strategy faces stronger negotiation, oversight, or protection constraints.";
-    }
-    return "This strategy remains possible, with some procedural constraints.";
-  }
-
-  if (presetId === "hybrid_redesign") {
-    if (workforce === "strong" || retraining === "high") {
-      return "Stronger training capacity makes work redesign easier to support.";
-    }
-    return "Redesign depends more heavily on firm-level capacity and investment.";
-  }
-
-  if (workforce === "strong" && (bargaining === "strong" || informationRights === "strong") && retraining === "high") {
-    return "There is stronger support for retraining, worker voice, and redeployment.";
-  }
-  if (workforce === "strong" || retraining === "high") {
-    return "Training infrastructure supports this strategy, while worker voice and redeployment commitments may vary.";
-  }
-  return "This strategy is possible, but depends more heavily on voluntary firm investment.";
+function closestOrganizationPreset(values: Record<string, string | boolean>): Preset {
+  return organizationalPresets.reduce((best, preset) =>
+    organizationPresetMatchScore(preset, values) > organizationPresetMatchScore(best, values) ? preset : best,
+  );
 }
 
 function normalizeDimension(control: ControlConfig, value: string): number {
@@ -854,41 +1272,6 @@ function ComparativeCasesPanel({
 }
 
 
-function DimensionSlider({
-  control,
-  value,
-  onChange,
-}: {
-  control: ControlConfig;
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  const index = Math.max(0, control.options.indexOf(value));
-  return (
-    <div className="dimension-row">
-      <div className="dimension-copy">
-        <strong>{control.label}</strong>
-        <span>{titleCase(value)}</span>
-      </div>
-      <div className="dimension-slider-wrap">
-        <input
-          aria-label={control.label}
-          className="dimension-slider"
-          type="range"
-          min={0}
-          max={control.options.length - 1}
-          step={1}
-          value={index}
-          onChange={(event) => onChange(control.options[Number(event.target.value)])}
-        />
-        <div className="dimension-ends">
-          <span>{titleCase(control.options[0])}</span>
-          <span>{titleCase(control.options[control.options.length - 1])}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function CausalConnector({
   label,
@@ -932,73 +1315,934 @@ function EvidencePanel({
   );
 }
 
-function OutcomeMovement({ outcome }: { outcome: OutcomeResult }) {
-  const meta = directionMeta[outcome.dimension];
-  const score = Math.max(-1, Math.min(1, outcome.score));
-  const position = 50 + score * 42;
-  const movement =
-    score > 0.2
-      ? `Moves toward ${meta.right}`
-      : score < -0.2
-        ? `Moves toward ${meta.left}`
-        : "Mixed or context-dependent movement";
+function formatInstitutionLevel(value: string): string {
+  if (value === "co_governed") return "Co-governed";
+  if (value === "rights_based") return "Rights-based";
+  return titleCase(value);
+}
+
+function InstitutionalDimensionItem({
+  control,
+  value,
+  onChange,
+}: {
+  control: ControlConfig;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const copy = institutionalDimensionCopy[control.field];
+  const index = Math.max(0, control.options.indexOf(value));
 
   return (
-    <article className="outcome-movement">
-      <div className="outcome-heading">
-        <div>
-          <h3>{formatOutcomeLabel(outcome.dimension)}</h3>
-          <p>{movement}</p>
-        </div>
+    <article className="institution-detail-item">
+      <div className="institution-detail-copy">
+        <h4>{control.label}</h4>
+        <p>{copy.explanation}</p>
       </div>
-      <div className="movement-scale" aria-label={`${formatOutcomeLabel(outcome.dimension)}: ${movement}`}>
-        <div className="movement-track">
-          <span className="movement-center" />
-          <span className="movement-marker" style={{ left: `${position}%` }} />
-        </div>
-        <div className="movement-labels">
-          <span>{meta.left}</span>
-          <span>{meta.right}</span>
+      <div className="institution-compact-control">
+        <span className="institution-current-level">{formatInstitutionLevel(value)}</span>
+        <div className="institution-slider-stack">
+          <input
+            aria-label={control.label}
+            className="institution-mini-slider"
+            type="range"
+            min={0}
+            max={control.options.length - 1}
+            step={1}
+            value={index}
+            onChange={(event) => onChange(control.options[Number(event.target.value)])}
+          />
+          <div className="institution-level-ends">
+            <span>{formatInstitutionLevel(control.options[0])}</span>
+            <span>{formatInstitutionLevel(control.options[control.options.length - 1])}</span>
+          </div>
         </div>
       </div>
     </article>
   );
 }
 
+function InstitutionalDetails({
+  values,
+  onChange,
+}: {
+  values: Record<string, string | boolean>;
+  onChange: (field: string, value: string) => void;
+}) {
+  const controlsByField = Object.fromEntries(institutionalControls.map((control) => [control.field, control]));
+
+  return (
+    <div className="institution-detail-panel">
+      <p className="institution-detail-intro">
+        These dimensions describe the rules and systems that shape how technological change is managed.
+      </p>
+      <div className="institution-detail-list">
+        {institutionalDetailGroups.flatMap((group) => group.fields).map((field) => {
+          const control = controlsByField[field];
+          return (
+            <InstitutionalDimensionItem
+              key={field}
+              control={control}
+              value={String(values[field])}
+              onChange={(value) => onChange(field, value)}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function formatOrganizationValue(value: string): string {
+  if (value === "pre_deployment") return "Pre-deployment";
+  if (value === "post_deployment") return "Post-deployment";
+  return titleCase(value);
+}
+
+function OrganizationAssumptionItem({
+  control,
+  value,
+  onChange,
+}: {
+  control: ControlConfig;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const index = Math.max(0, control.options.indexOf(value));
+  const explanation = organizationalDimensionCopy[control.field] ?? "";
+
+  return (
+    <article className="organization-assumption-item">
+      <div className="organization-assumption-copy">
+        <h4>{control.label}</h4>
+        <p>{explanation}</p>
+      </div>
+      <div className="organization-compact-control">
+        <span className="organization-current-level">{formatOrganizationValue(value)}</span>
+        <div className="organization-slider-stack">
+          <input
+            aria-label={control.label}
+            className="organization-mini-slider"
+            type="range"
+            min={0}
+            max={control.options.length - 1}
+            step={1}
+            value={index}
+            onChange={(event) => onChange(control.options[Number(event.target.value)])}
+          />
+          <div className="organization-level-ends">
+            <span>{formatOrganizationValue(control.options[0])}</span>
+            <span>{formatOrganizationValue(control.options[control.options.length - 1])}</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+
+type TensionSide = "left" | "right";
+
+type OutcomeTensionFamily = {
+  id: string;
+  leftLabel: string;
+  rightLabel: string;
+  leftRuleIds: string[];
+  rightRuleIds: string[];
+};
+
+const outcomeTensionFamilies: Record<OutcomeDimension, OutcomeTensionFamily[]> = {
+  employment: [
+    {
+      id: "employment-oversight",
+      leftLabel: "Low oversight",
+      rightLabel: "Human oversight",
+      leftRuleIds: [],
+      rightRuleIds: ["rule_human_oversight_regulation"],
+    },
+    {
+      id: "employment-safeguards",
+      leftLabel: "Weak screening safeguards",
+      rightLabel: "Data & bias safeguards",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_data_protection_bias_safeguards",
+        "rule_nyc_aedt_bias_audit",
+      ],
+    },
+  ],
+  wages: [
+    {
+      id: "wages-investment",
+      leftLabel: "Short-term cost focus",
+      rightLabel: "Worker investment & redesign",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_employer_retraining_incentives",
+        "rule_singapore_employer_incentives_wages",
+      ],
+    },
+  ],
+  mobility: [
+    {
+      id: "mobility-security",
+      leftLabel: "Thin transition support",
+      rightLabel: "Transition security",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_social_protection_transition_buffer",
+        "rule_denmark_flexicurity_reallocation",
+      ],
+    },
+    {
+      id: "mobility-pathways",
+      leftLabel: "Fragmented pathways",
+      rightLabel: "Career pathways",
+      leftRuleIds: [],
+      rightRuleIds: ["rule_nyc_skills_job_quality_pathways"],
+    },
+  ],
+  productivity: [
+    {
+      id: "productivity-design",
+      leftLabel: "Poor task fit",
+      rightLabel: "Complementary task design",
+      leftRuleIds: [],
+      rightRuleIds: ["rule_augmentation_task_allocation_productivity"],
+    },
+  ],
+  redeployment: [
+    {
+      id: "redeployment-training",
+      leftLabel: "Weak retraining support",
+      rightLabel: "Training & redeployment capacity",
+      leftRuleIds: ["rule_weak_training_displacement_risk"],
+      rightRuleIds: ["rule_strong_training_redeployment"],
+    },
+    {
+      id: "redeployment-security",
+      leftLabel: "Individual adjustment",
+      rightLabel: "Transition security",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_social_protection_transition_buffer",
+        "rule_denmark_flexicurity_reallocation",
+      ],
+    },
+    {
+      id: "redeployment-coordination",
+      leftLabel: "Fragmented coordination",
+      rightLabel: "Coordinated transition",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_social_dialogue_training",
+        "rule_singapore_tripartite_transition",
+      ],
+    },
+  ],
+  displacement: [
+    {
+      id: "displacement-deployment",
+      leftLabel: "Automation-first substitution",
+      rightLabel: "Managed transition",
+      leftRuleIds: ["rule_automation_first_high_exposure_risk"],
+      rightRuleIds: [],
+    },
+    {
+      id: "displacement-training",
+      leftLabel: "Weak retraining support",
+      rightLabel: "Redeployment pathways",
+      leftRuleIds: ["rule_weak_training_displacement_risk"],
+      rightRuleIds: [],
+    },
+  ],
+  skill_accumulation: [
+    {
+      id: "skills-investment",
+      leftLabel: "Skill-eroding automation",
+      rightLabel: "Training & learning investment",
+      leftRuleIds: ["rule_meaningful_work_agency_risk"],
+      rightRuleIds: [
+        "rule_strong_training_redeployment",
+        "rule_social_dialogue_training",
+        "rule_employer_retraining_incentives",
+      ],
+    },
+    {
+      id: "skills-redesign",
+      leftLabel: "Top-down redesign",
+      rightLabel: "Worker-centered redesign",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_worker_centered_redesign",
+        "rule_worker_consultation_ai_adoption",
+      ],
+    },
+  ],
+  job_quality: [
+    {
+      id: "quality-agency",
+      leftLabel: "Algorithmic control",
+      rightLabel: "Worker agency",
+      leftRuleIds: [
+        "rule_algorithmic_management_job_quality_risk",
+        "rule_automation_first_high_exposure_risk",
+      ],
+      rightRuleIds: [
+        "rule_worker_voice_job_quality",
+        "rule_worker_consultation_ai_adoption",
+      ],
+    },
+    {
+      id: "quality-safeguards",
+      leftLabel: "Weak safeguards",
+      rightLabel: "Governance safeguards",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_human_oversight_regulation",
+        "rule_algorithmic_transparency_information_rights",
+        "rule_data_protection_bias_safeguards",
+      ],
+    },
+    {
+      id: "quality-redesign",
+      leftLabel: "Meaning-eroding automation",
+      rightLabel: "Human-centered redesign",
+      leftRuleIds: ["rule_meaningful_work_agency_risk"],
+      rightRuleIds: [
+        "rule_worker_centered_redesign",
+        "rule_augmentation_task_allocation_productivity",
+      ],
+    },
+  ],
+  distribution_of_gains: [
+    {
+      id: "distribution-power",
+      leftLabel: "Employer discretion",
+      rightLabel: "Bargaining power & standards",
+      leftRuleIds: [],
+      rightRuleIds: [
+        "rule_productive_constraints_distribution",
+        "rule_worker_voice_job_quality",
+      ],
+    },
+    {
+      id: "distribution-information",
+      leftLabel: "Opaque allocation",
+      rightLabel: "Transparency & information rights",
+      leftRuleIds: [],
+      rightRuleIds: ["rule_algorithmic_transparency_information_rights"],
+    },
+  ],
+};
+
+function familyYPositions(count: number): number[] {
+  if (count <= 1) return [50];
+  if (count === 2) return [34, 66];
+  return [24, 50, 76];
+}
+
+function ruleIsActive(outcome: OutcomeResult, ruleIds: string[]): boolean {
+  if (!ruleIds.length) return false;
+  const activeIds = new Set(outcome.ruleIds);
+  return ruleIds.some((ruleId) => activeIds.has(ruleId));
+}
+
+function familyNarrative(
+  outcome: OutcomeResult,
+  ruleIds: string[],
+): string | null {
+  if (!ruleIds.length) return null;
+
+  const activeIds = new Set(outcome.ruleIds);
+  const activeRule =
+    appScenarioRules.find(
+      (rule) => ruleIds.includes(rule.id) && activeIds.has(rule.id),
+    ) ??
+    appScenarioRules.find((rule) => ruleIds.includes(rule.id));
+
+  return activeRule?.narrative_template ?? null;
+}
+
+function clamp01(value: number): number {
+  return Math.max(0, Math.min(1, value));
+}
+
+function smoothStep(value: number): number {
+  const x = clamp01(value);
+  return x * x * (3 - 2 * x);
+}
+
+function previewLevelForFamily({
+  familyIndex,
+  familyCount,
+  side,
+  active,
+  previewDirection,
+  previewProgress,
+}: {
+  familyIndex: number;
+  familyCount: number;
+  side: TensionSide;
+  active: boolean;
+  previewDirection: TensionSide | null;
+  previewProgress: number;
+}): number {
+  if (!previewDirection || previewProgress <= 0) {
+    return active ? 1 : 0;
+  }
+
+  if (side === previewDirection) {
+    if (active) return 1;
+
+    const segment = 1 / Math.max(1, familyCount);
+    const start = Math.max(0, familyIndex * segment - segment * 0.18);
+    const end = Math.min(1, start + segment * 1.18);
+
+    return smoothStep(
+      (previewProgress - start) / Math.max(0.001, end - start),
+    );
+  }
+
+  if (active) {
+    const segment = 1 / Math.max(1, familyCount);
+    const start = Math.max(0, familyIndex * segment - segment * 0.1);
+    const end = Math.min(1, start + segment * 1.08);
+    const fade = smoothStep(
+      (previewProgress - start) / Math.max(0.001, end - start),
+    );
+
+    return Math.max(0.12, 1 - fade * 0.88);
+  }
+
+  return 0;
+}
+
+function TensionFamilyButton({
+  label,
+  side,
+  level,
+  current,
+  focused,
+  onHover,
+  onLeave,
+  onClick,
+}: {
+  label: string;
+  side: TensionSide;
+  level: number;
+  current: boolean;
+  focused: boolean;
+  onHover: () => void;
+  onLeave: () => void;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={[
+        "tension-family-label",
+        `is-${side}`,
+        current ? "is-current" : "is-latent",
+        level >= 0.5 ? "is-lit" : "",
+        focused ? "is-focused" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={{ "--family-level": level.toFixed(3) } as CSSProperties}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      onFocus={onHover}
+      onBlur={onLeave}
+      onClick={onClick}
+    >
+      <span>{label}</span>
+    </button>
+  );
+}
+
+function OutcomeMovement({
+  outcome,
+  revealIndex,
+}: {
+  outcome: OutcomeResult;
+  revealIndex: number;
+}) {
+  const meta = directionMeta[outcome.dimension];
+  const families = outcomeTensionFamilies[outcome.dimension];
+
+  // Keep the evidence-derived modeled result in a central band and reserve
+  // the outer field for counterfactual exploration.
+  const modeledScore = Math.max(-1, Math.min(1, outcome.score));
+  const modeledPosition = 50 + modeledScore * 18;
+
+  const [previewPosition, setPreviewPosition] = useState<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const [hoveredFamily, setHoveredFamily] = useState<{
+    familyId: string;
+    side: TensionSide;
+  } | null>(null);
+  const [lockedFamily, setLockedFamily] = useState<{
+    familyId: string;
+    side: TensionSide;
+  } | null>(null);
+
+  const stageRef = useRef<HTMLDivElement | null>(null);
+
+  const displayPosition = previewPosition ?? modeledPosition;
+  const previewDirection: TensionSide | null =
+    previewPosition === null
+      ? null
+      : previewPosition > modeledPosition + 1
+        ? "right"
+        : previewPosition < modeledPosition - 1
+          ? "left"
+          : null;
+
+  const previewProgress =
+    previewDirection === "right"
+      ? clamp01(
+          (displayPosition - modeledPosition) /
+            Math.max(1, 92 - modeledPosition),
+        )
+      : previewDirection === "left"
+        ? clamp01(
+            (modeledPosition - displayPosition) /
+              Math.max(1, modeledPosition - 8),
+          )
+        : 0;
+
+  const activeFocus = hoveredFamily ?? lockedFamily;
+
+  const hoverTug =
+    previewPosition === null && activeFocus
+      ? activeFocus.side === "right"
+        ? 7
+        : -7
+      : 0;
+
+  const yPositions = familyYPositions(families.length);
+
+  function positionFromClientX(clientX: number): number {
+    const stage = stageRef.current;
+    if (!stage) return modeledPosition;
+
+    const rect = stage.getBoundingClientRect();
+    const ratio = clamp01((clientX - rect.left) / Math.max(1, rect.width));
+
+    return Math.max(8, Math.min(92, ratio * 100));
+  }
+
+  function startDragging(event: React.PointerEvent<HTMLButtonElement>) {
+    setLockedFamily(null);
+    setDragging(true);
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  }
+
+  function continueDragging(event: React.PointerEvent<HTMLButtonElement>) {
+    if (!dragging) return;
+    setPreviewPosition(positionFromClientX(event.clientX));
+  }
+
+  function stopDragging(event: React.PointerEvent<HTMLButtonElement>) {
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture?.(event.pointerId);
+    }
+
+    setDragging(false);
+
+    if (
+      previewPosition !== null &&
+      Math.abs(previewPosition - modeledPosition) < 1.5
+    ) {
+      setPreviewPosition(null);
+    }
+  }
+
+  function resetPreview() {
+    setPreviewPosition(null);
+    setLockedFamily(null);
+  }
+
+  function familyCurrent(
+    family: OutcomeTensionFamily,
+    side: TensionSide,
+  ): boolean {
+    return ruleIsActive(
+      outcome,
+      side === "left" ? family.leftRuleIds : family.rightRuleIds,
+    );
+  }
+
+  function familyLevel(
+    family: OutcomeTensionFamily,
+    side: TensionSide,
+    familyIndex: number,
+  ): number {
+    return previewLevelForFamily({
+      familyIndex,
+      familyCount: families.length,
+      side,
+      active: familyCurrent(family, side),
+      previewDirection,
+      previewProgress,
+    });
+  }
+
+  function targetPositionForFamily(
+    familyIndex: number,
+    side: TensionSide,
+  ): number {
+    const fraction = Math.min(
+      0.94,
+      (familyIndex + 0.8) / Math.max(1, families.length),
+    );
+
+    return side === "right"
+      ? modeledPosition + fraction * (92 - modeledPosition)
+      : modeledPosition - fraction * (modeledPosition - 8);
+  }
+
+  function handleFamilyClick(
+    family: OutcomeTensionFamily,
+    familyIndex: number,
+    side: TensionSide,
+  ) {
+    const next = { familyId: family.id, side };
+
+    setLockedFamily((current) =>
+      current?.familyId === family.id && current.side === side ? null : next,
+    );
+
+    if (!familyCurrent(family, side)) {
+      setPreviewPosition(targetPositionForFamily(familyIndex, side));
+    }
+  }
+
+  const previewActive =
+    previewPosition !== null &&
+    Math.abs(displayPosition - modeledPosition) >= 1.5;
+
+  const lockedDefinition = lockedFamily
+    ? families.find((family) => family.id === lockedFamily.familyId)
+    : null;
+
+  const lockedRuleIds =
+    lockedDefinition && lockedFamily
+      ? lockedFamily.side === "left"
+        ? lockedDefinition.leftRuleIds
+        : lockedDefinition.rightRuleIds
+      : [];
+
+  const lockedNarrative =
+    lockedFamily && lockedDefinition
+      ? familyNarrative(outcome, lockedRuleIds)
+      : null;
+
+  return (
+    <article
+      className={`outcome-movement ${
+        previewActive ? "has-preview" : ""
+      } ${dragging ? "is-dragging" : ""}`}
+      style={{ "--outcome-index": revealIndex } as CSSProperties}
+    >
+      <div className="outcome-heading">
+        <h3>{formatOutcomeLabel(outcome.dimension)}</h3>
+      </div>
+
+      <div
+        className={`outcome-tension-system ${
+          previewDirection ? `preview-${previewDirection}` : ""
+        }`}
+      >
+        <div
+          className="tension-family-bank is-left"
+          style={
+            {
+              "--family-count": families.length,
+            } as CSSProperties
+          }
+        >
+          {families.map((family, index) => {
+            const level = familyLevel(family, "left", index);
+            const focused =
+              activeFocus?.familyId === family.id &&
+              activeFocus.side === "left";
+
+            return (
+              <TensionFamilyButton
+                key={`${family.id}-left`}
+                label={family.leftLabel}
+                side="left"
+                level={level}
+                current={familyCurrent(family, "left")}
+                focused={focused}
+                onHover={() =>
+                  setHoveredFamily({ familyId: family.id, side: "left" })
+                }
+                onLeave={() => setHoveredFamily(null)}
+                onClick={() => handleFamilyClick(family, index, "left")}
+              />
+            );
+          })}
+        </div>
+
+        <div className="outcome-tension-stage" ref={stageRef}>
+          <svg
+            className="outcome-tension-cables"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            {families.map((family, index) => {
+              const y = yPositions[index];
+              const leftLevel = familyLevel(family, "left", index);
+              const rightLevel = familyLevel(family, "right", index);
+              const nodeX = displayPosition;
+
+              const leftPath = `M 2 ${y} C 28 ${y}, ${Math.max(
+                8,
+                nodeX - 16,
+              )} 50, ${nodeX} 50`;
+
+              const rightPath = `M ${nodeX} 50 C ${Math.min(
+                92,
+                nodeX + 16,
+              )} 50, 72 ${y}, 98 ${y}`;
+
+              return (
+                <g key={family.id}>
+                  <path
+                    className="tension-cable-base"
+                    d={leftPath}
+                  />
+                  <path
+                    className="tension-cable-live"
+                    d={leftPath}
+                    style={{ "--cable-level": leftLevel } as CSSProperties}
+                  />
+                  <circle
+                    className="tension-endpoint-base"
+                    cx="2"
+                    cy={y}
+                    r="2.25"
+                  />
+                  <circle
+                    className="tension-endpoint-live"
+                    cx="2"
+                    cy={y}
+                    r={1.15 + leftLevel * 1.15}
+                    style={{ "--endpoint-level": leftLevel } as CSSProperties}
+                  />
+
+                  <path
+                    className="tension-cable-base"
+                    d={rightPath}
+                  />
+                  <path
+                    className="tension-cable-live"
+                    d={rightPath}
+                    style={{ "--cable-level": rightLevel } as CSSProperties}
+                  />
+                  <circle
+                    className="tension-endpoint-base"
+                    cx="98"
+                    cy={y}
+                    r="2.25"
+                  />
+                  <circle
+                    className="tension-endpoint-live"
+                    cx="98"
+                    cy={y}
+                    r={1.15 + rightLevel * 1.15}
+                    style={{ "--endpoint-level": rightLevel } as CSSProperties}
+                  />
+                </g>
+              );
+            })}
+          </svg>
+
+          <div className="outcome-balance-axis" aria-hidden="true">
+            <span className="outcome-balance-midpoint" />
+          </div>
+
+          {previewActive && (
+            <>
+              <button
+                type="button"
+                className="outcome-modeled-anchor"
+                style={
+                  {
+                    "--modeled-position": `${modeledPosition}%`,
+                  } as CSSProperties
+                }
+                aria-label="Return to the modeled scenario position"
+                onClick={resetPreview}
+              >
+                <span />
+              </button>
+
+              <span
+                className="outcome-preview-trace"
+                style={
+                  {
+                    "--trace-start": `${Math.min(
+                      modeledPosition,
+                      displayPosition,
+                    )}%`,
+                    "--trace-width": `${Math.abs(
+                      displayPosition - modeledPosition,
+                    )}%`,
+                  } as CSSProperties
+                }
+                aria-hidden="true"
+              />
+            </>
+          )}
+
+          <button
+            type="button"
+            className={`outcome-balance-node ${
+              previewActive ? "is-preview" : ""
+            } ${dragging ? "is-dragging" : ""}`}
+            style={
+              {
+                "--balance-position": `${displayPosition}%`,
+                "--balance-tug": `${hoverTug}px`,
+              } as CSSProperties
+            }
+            aria-label="Drag horizontally to explore how the balance could shift"
+            onPointerDown={startDragging}
+            onPointerMove={continueDragging}
+            onPointerUp={stopDragging}
+            onPointerCancel={stopDragging}
+            onDoubleClick={resetPreview}
+          >
+            <span className="balance-node-orbit" aria-hidden="true" />
+            <span className="balance-node-core" />
+          </button>
+        </div>
+
+        <div
+          className="tension-family-bank is-right"
+          style={
+            {
+              "--family-count": families.length,
+            } as CSSProperties
+          }
+        >
+          {families.map((family, index) => {
+            const level = familyLevel(family, "right", index);
+            const focused =
+              activeFocus?.familyId === family.id &&
+              activeFocus.side === "right";
+
+            return (
+              <TensionFamilyButton
+                key={`${family.id}-right`}
+                label={family.rightLabel}
+                side="right"
+                level={level}
+                current={familyCurrent(family, "right")}
+                focused={focused}
+                onHover={() =>
+                  setHoveredFamily({ familyId: family.id, side: "right" })
+                }
+                onLeave={() => setHoveredFamily(null)}
+                onClick={() => handleFamilyClick(family, index, "right")}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function OutcomesExplorer({
+  result,
+}: {
+  result: ScenarioResult;
+}) {
+  return (
+    <div className="outcomes-list">
+      {result.outcomes.map((outcome, index) => (
+        <OutcomeMovement
+          key={outcome.dimension}
+          outcome={outcome}
+          revealIndex={index}
+        />
+      ))}
+    </div>
+  );
+}
+
+
+function OrganizationDecisionIcon({ field, size = 18 }: { field: string; size?: number }) {
+  if (field === "deployment_strategy") {
+    return <Workflow size={size} strokeWidth={1.8} aria-hidden="true" />;
+  }
+
+  if (field === "retraining_commitment") {
+    return <GraduationCap size={size} strokeWidth={1.8} aria-hidden="true" />;
+  }
+
+  return <UsersRound size={size} strokeWidth={1.8} aria-hidden="true" />;
+}
+
 function OrganizationDecisionTrack({
   control,
   value,
   occupation,
+  revealIndex,
   onChange,
 }: {
   control: ControlConfig;
   value: string;
   occupation: OccupationProfile;
+  revealIndex: number;
   onChange: (value: string) => void;
 }) {
   const index = Math.max(0, control.options.indexOf(value));
-  const context = organizationControlContext(occupation, control.field);
+  const explanation = organizationDecisionCopy(occupation, control.field, value);
 
   return (
-    <article className="organization-decision-track">
+    <article
+      className="organization-decision-track"
+      style={{ "--decision-index": revealIndex } as CSSProperties}
+    >
       <div className="organization-decision-copy">
         <div className="decision-title-row">
           <strong>{control.label}</strong>
           <span>{titleCase(value)}</span>
         </div>
-        <p>{context.helper}</p>
+        <p className="decision-explanation" key={`${control.field}-${value}`}>
+          {explanation}
+        </p>
       </div>
       <div className="decision-track-control">
-        <input
-          aria-label={control.label}
-          className="decision-slider"
-          type="range"
-          min={0}
-          max={control.options.length - 1}
-          step={1}
-          value={index}
-          onChange={(event) => onChange(control.options[Number(event.target.value)])}
-        />
+        <div
+          className="decision-slider-shell"
+          style={
+            {
+              "--decision-progress": `${control.options.length > 1 ? (index / (control.options.length - 1)) * 100 : 0}%`,
+            } as CSSProperties
+          }
+        >
+          <input
+            aria-label={control.label}
+            className="decision-slider"
+            type="range"
+            min={0}
+            max={control.options.length - 1}
+            step={1}
+            value={index}
+            onChange={(event) => onChange(control.options[Number(event.target.value)])}
+          />
+          <span className="decision-slider-marker" aria-hidden="true">
+            <OrganizationDecisionIcon field={control.field} />
+          </span>
+        </div>
         <div className="decision-track-labels">
           <span>{titleCase(control.options[0])}</span>
           <span>{titleCase(control.options[control.options.length - 1])}</span>
@@ -1095,12 +2339,17 @@ function WorkDesignStudio({
 
       <div className="studio-intro-row">
         <p>
-          The starting arrangement uses this occupation's O*NET task descriptions and the selected scenario to imagine how
-          work could be divided. It is a work-design prompt, not a prediction or estimated task share.
+          The starting arrangement uses tasks commonly associated with this occupation and the selected scenario to imagine
+          how work could be divided. It is a work-design prompt, not a prediction or estimated task share.
         </p>
         <button type="button" className="text-button reset-studio" onClick={onReset} disabled={!customized}>
           Reset to scenario
         </button>
+      </div>
+
+      <div className="studio-instruction" role="note">
+        <MoveHorizontal size={17} aria-hidden="true" />
+        <span>Drag tasks horizontally between Human-led, Human + AI, and AI-led to explore different ways this work could be organized.</span>
       </div>
 
       <div className="work-spectrum" aria-label="Interactive work design studio">
@@ -1142,7 +2391,7 @@ function WorkDesignStudio({
                   draggable
                   className={`task-token lane-${assignment.lane}`}
                   style={{ "--lane-index": laneIndex } as CSSProperties}
-                  title={`${assignment.task.text}\n\n${assignment.rationale}\n\nDrag horizontally to another lane to explore a different work design.`}
+                  title={`${assignment.task.text}\n\n${assignment.rationale}`}
                   onDragStart={(event) => {
                     event.dataTransfer.effectAllowed = "move";
                     event.dataTransfer.setData("text/plain", assignment.task.id);
@@ -1153,7 +2402,6 @@ function WorkDesignStudio({
                 >
                   <TaskModeIcon lane={assignment.lane} />
                   <span>{compactTaskText(assignment.task.text, 9)}</span>
-                  <small>drag horizontally</small>
                 </button>
               </div>
             );
@@ -1161,18 +2409,13 @@ function WorkDesignStudio({
         </div>
       </div>
 
-      {customized ? (
+      {customized && (
         <div className="studio-mode-note custom">
           <strong>You are exploring your own work-design imaginary.</strong>
           <span>
             The outcome movements below still reflect the model-supported institutional and organizational scenario; your
             manual task arrangement is kept separate from those outputs.
           </span>
-        </div>
-      ) : (
-        <div className="studio-mode-note">
-          <strong>Make it yours.</strong>
-          <span>Drag the task objects between lanes to explore alternative ways this occupation could be organized.</span>
         </div>
       )}
     </div>
@@ -1276,8 +2519,14 @@ function App() {
   const [showComparativeCases, setShowComparativeCases] = useState(false);
   const [referenceCaseId, setReferenceCaseId] = useState("");
   const [showOrganizationDetails, setShowOrganizationDetails] = useState(false);
+  const [organizationInView, setOrganizationInView] = useState(false);
+  const organizationSectionRef = useRef<HTMLElement | null>(null);
   const [comparison, setComparison] = useState<ComparisonSnapshot | null>(null);
   const [customTaskLanes, setCustomTaskLanes] = useState<Record<string, WorkLane>>({});
+  const [expandedSearchSections, setExpandedSearchSections] = useState<Record<string, boolean>>({});
+  const [showOccupationBrowser, setShowOccupationBrowser] = useState(false);
+  const [browseFamilyCode, setBrowseFamilyCode] = useState("");
+  const [showOccupationDetail, setShowOccupationDetail] = useState(false);
 
   const occupation = appOccupations.find((item) => item.onet_soc_code === occupationCode) ?? defaultOccupation;
   const institutionPreset =
@@ -1296,6 +2545,7 @@ function App() {
   const activeEvidence = appEvidenceReferences.filter((item) => result.evidenceIds.includes(item.source_id));
   const institutionLabel = getPresetLabel(institutionPreset, institutionalOverrides);
   const organizationLabel = getPresetLabel(organizationPreset, organizationalOverrides);
+  const closestOrganizationResponse = closestOrganizationPreset(organizationalValues);
   const scenarioTaskAssignments = buildScenarioTaskAssignments(occupation, institutionalValues, organizationalValues);
   const currentComparisonSignature = buildComparisonSignature(
     occupation,
@@ -1317,24 +2567,96 @@ function App() {
     setCustomTaskLanes({});
   }, [scenarioSignature]);
 
-  const filteredOccupations = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    const matches = normalized
-      ? appOccupations.filter((item) =>
-          `${item.title} ${item.onet_soc_code} ${item.soc_code}`.toLowerCase().includes(normalized),
-        )
-      : appOccupations;
-    return matches.some((item) => item.onet_soc_code === occupation.onet_soc_code)
-      ? matches
-      : [occupation, ...matches];
-  }, [occupation, query]);
+  useEffect(() => {
+    setExpandedSearchSections({});
+  }, [query]);
 
-  const searchResults = query.trim() ? filteredOccupations.slice(0, 8) : [];
+  useEffect(() => {
+    const section = organizationSectionRef.current;
+    if (!section || organizationInView) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setOrganizationInView(true);
+        observer.disconnect();
+      },
+      {
+        threshold: 0.22,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [organizationInView]);
+
+  const occupationSearch = useMemo(() => {
+    const normalized = normalizeSearchValue(query);
+    if (!normalized) {
+      return { mode: "occupation" as const, matches: [] as OccupationSearchMatch[] };
+    }
+
+    const directMatches: Array<OccupationSearchMatch & { sourceIndex: number }> = [];
+    const aliasMatches: Array<OccupationSearchMatch & { sourceIndex: number }> = [];
+
+    appOccupations.forEach((item, sourceIndex) => {
+      const directTier = directOccupationMatchTier(item, normalized);
+      if (directTier !== null) {
+        directMatches.push({ item, tier: directTier, matchType: "occupation", sourceIndex });
+        return;
+      }
+
+      const aliasMatch = bestAliasMatch(item, normalized);
+      if (aliasMatch) {
+        aliasMatches.push({
+          item,
+          tier: aliasMatch.tier,
+          matchType: "job_title",
+          matchedAlias: aliasMatch.alias,
+          sourceIndex,
+        });
+      }
+    });
+
+    const sortMatches = (a: OccupationSearchMatch & { sourceIndex: number }, b: OccupationSearchMatch & { sourceIndex: number }) =>
+      a.tier - b.tier ||
+      (a.matchType === "job_title" ? (a.matchedAlias ?? "") : occupationDisplayTitle(a.item)).localeCompare(
+        b.matchType === "job_title" ? (b.matchedAlias ?? "") : occupationDisplayTitle(b.item),
+      ) ||
+      a.sourceIndex - b.sourceIndex;
+
+    directMatches.sort(sortMatches);
+    aliasMatches.sort(sortMatches);
+
+    if (directMatches.length > 0) {
+      return { mode: "occupation" as const, matches: directMatches };
+    }
+
+    return { mode: "job_title" as const, matches: aliasMatches };
+  }, [query]);
+
+  const groupedSearchResults = query.trim().length > 0 && occupationSearch.matches.length > 8;
+  const searchResults = query.trim()
+    ? groupedSearchResults
+      ? occupationSearch.matches
+      : occupationSearch.matches.slice(0, 8)
+    : [];
+  const searchResultSections = buildSearchResultSections(searchResults);
+  const occupationFamilies = useMemo(() => buildOccupationFamilies(appOccupations), []);
+  const activeBrowseFamily =
+    occupationFamilies.find((family) => family.code === browseFamilyCode) ?? null;
+  const browseSubfamilies = activeBrowseFamily
+    ? buildOccupationSubfamilies(activeBrowseFamily)
+    : [];
 
   function selectOccupation(nextOccupation: OccupationProfile) {
     setOccupationCode(nextOccupation.onet_soc_code);
     setQuery("");
     setComparison(null);
+    setShowOccupationBrowser(false);
+    setBrowseFamilyCode("");
+    setExpandedSearchSections({});
   }
 
   function selectInstitutionPreset(preset: Preset) {
@@ -1350,7 +2672,6 @@ function App() {
     setOrganizationPresetId(preset.id);
     setOrganizationalOverrides({});
   }
-
 
   function moveWorkTask(taskId: string, lane: WorkLane) {
     const scenarioLane = scenarioTaskAssignments.find((assignment) => assignment.task.id === taskId)?.lane;
@@ -1368,7 +2689,7 @@ function App() {
   function saveComparison() {
     setComparison({
       occupationCode: occupation.onet_soc_code,
-      occupationTitle: occupation.title,
+      occupationTitle: occupationDisplayTitle(occupation),
       exposureLevel: occupation.exposure_baseline.combined_level ?? "unknown",
       exposureScore: occupation.exposure_baseline.combined_score ?? null,
       comparisonSignature: currentComparisonSignature,
@@ -1406,37 +2727,201 @@ function App() {
               <input
                 id="occupation-search"
                 value={query}
-                placeholder="Search occupation title"
-                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search occupations"
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  if (event.target.value.trim()) {
+                    setShowOccupationBrowser(false);
+                    setBrowseFamilyCode("");
+                  }
+                }}
               />
             </label>
+
             {query.trim() && (
               <div className="search-results" aria-label="Occupation search results">
-                {searchResults.map((item) => (
-                  <button key={item.onet_soc_code} type="button" onClick={() => selectOccupation(item)}>
-                    {item.title}
-                  </button>
-                ))}
+                <div className="search-match-type">
+                  {groupedSearchResults
+                    ? "Matching occupation groups"
+                    : occupationSearch.mode === "occupation"
+                      ? "Occupation matches"
+                      : "Job title matches"}
+                </div>
+
+                {groupedSearchResults && (
+                  <p className="search-broad-help">
+                    Choose a job group to see matching occupations.
+                  </p>
+                )}
+
+                {searchResultSections.map((section, sectionIndex) => {
+                  const sectionKey =
+                    `${section.familyCode ?? "results"}-${section.subfamilyCode ?? sectionIndex}`;
+                  const expanded = Boolean(expandedSearchSections[sectionKey]);
+
+                  return (
+                    <div key={sectionKey} className="search-result-section">
+                      {section.heading && groupedSearchResults ? (
+                        <>
+                          <button
+                            type="button"
+                            className="search-result-heading"
+                            aria-expanded={expanded}
+                            onClick={() =>
+                              setExpandedSearchSections((current) => ({
+                                ...current,
+                                [sectionKey]: !expanded,
+                              }))
+                            }
+                          >
+                            <span className="search-result-heading-label">
+                              <span className="search-result-chevron" aria-hidden="true">
+                                {expanded ? "⌄" : "›"}
+                              </span>
+                              <span>{section.heading}</span>
+                            </span>
+                            <span>{section.items.length}</span>
+                          </button>
+
+                          {expanded && (
+                            <div className="search-group-items">
+                              {section.items.map((match) => (
+                                <button
+                                  key={match.item.onet_soc_code}
+                                  className="search-result-button"
+                                  type="button"
+                                  onClick={() => selectOccupation(match.item)}
+                                >
+                                  {match.matchType === "job_title" ? (
+                                    <>
+                                      <span>{match.matchedAlias}</span>
+                                      <span className="occupation-category">
+                                        Occupation category: {occupationDisplayTitle(match.item)}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <span>{occupationDisplayTitle(match.item)}</span>
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        section.items.map((match) => (
+                          <button
+                            key={match.item.onet_soc_code}
+                            className="search-result-button"
+                            type="button"
+                            onClick={() => selectOccupation(match.item)}
+                          >
+                            {match.matchType === "job_title" ? (
+                              <>
+                                <span>{match.matchedAlias}</span>
+                                <span className="occupation-category">
+                                  Occupation category: {occupationDisplayTitle(match.item)}
+                                </span>
+                              </>
+                            ) : (
+                              <span>{occupationDisplayTitle(match.item)}</span>
+                            )}
+                          </button>
+                        ))
+                      )}
+                    </div>
+                  );
+                })}
                 {searchResults.length === 0 && <p>No matching occupations.</p>}
               </div>
             )}
-            <label className="select-line" htmlFor="occupation-select">
-              <span>Selected occupation</span>
-              <select
-                id="occupation-select"
-                value={occupationCode}
-                onChange={(event) => {
-                  setOccupationCode(event.target.value);
-                  setComparison(null);
+
+            <div className="occupation-picker-actions">
+              <button
+                type="button"
+                className="browse-occupations-toggle"
+                aria-expanded={showOccupationBrowser}
+                aria-label="Browse occupations by job family"
+                onClick={() => {
+                  setQuery("");
+                  setShowOccupationBrowser((current) => !current);
+                  if (showOccupationBrowser) setBrowseFamilyCode("");
                 }}
               >
-                {appOccupations.map((item) => (
-                  <option key={item.onet_soc_code} value={item.onet_soc_code}>
-                    {item.title}
-                  </option>
-                ))}
-              </select>
-            </label>
+                <Layers3 size={16} />
+                <span>{showOccupationBrowser ? "Hide job families" : "Browse by job family"}</span>
+                <span aria-hidden="true">→</span>
+              </button>
+
+              {showOccupationBrowser && (
+                <div className="occupation-browser">
+                  {activeBrowseFamily ? (
+                    <>
+                      <div className="occupation-browser-header">
+                        <button type="button" onClick={() => setBrowseFamilyCode("")}>
+                          ← All job families
+                        </button>
+                        <div>
+                          <span>Job family</span>
+                          <strong>{activeBrowseFamily.label}</strong>
+                        </div>
+                      </div>
+
+                      <div className="occupation-subfamily-list">
+                        {browseSubfamilies.map((subfamily) => (
+                          <details key={subfamily.code} className="occupation-subfamily">
+                            <summary>
+                              <span>{subfamily.label}</span>
+                              <small>{subfamily.items.length}</small>
+                            </summary>
+                            <div className="occupation-subfamily-items">
+                              {subfamily.items.map((item) => (
+                                <button
+                                  type="button"
+                                  key={item.onet_soc_code}
+                                  onClick={() => selectOccupation(item)}
+                                >
+                                  {occupationDisplayTitle(item)}
+                                </button>
+                              ))}
+                            </div>
+                          </details>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="occupation-browser-intro">
+                        Choose a broad job family, then narrow to an occupation.
+                      </p>
+                      <div className="occupation-family-grid">
+                        {occupationFamilies.map((family) => (
+                          <button
+                            type="button"
+                            key={family.code}
+                            onClick={() => setBrowseFamilyCode(family.code)}
+                          >
+                            <strong>{family.label}</strong>
+                            <span>{family.items.length} occupations</span>
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
+              <button
+                type="button"
+                className="occupation-detail-toggle"
+                aria-expanded={showOccupationDetail}
+                onClick={() => setShowOccupationDetail((current) => !current)}
+              >
+                <BookOpen size={16} />
+                <span>{showOccupationDetail ? "Hide occupation detail" : "Occupation detail"}</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+
           </div>
 
           <div className="baseline-lock">
@@ -1444,7 +2929,7 @@ function App() {
               <Lock size={18} />
               <span>Held constant in this scenario</span>
             </div>
-            <h2>{occupation.title}</h2>
+            <h2>{occupationDisplayTitle(occupation)}</h2>
             <div className="exposure-line">
               <Gauge size={18} />
               <span>AI exposure</span>
@@ -1457,33 +2942,31 @@ function App() {
           </div>
         </div>
 
-        <details className="quiet-details">
-          <summary>
-            <BookOpen size={16} />
-            Occupation detail
-          </summary>
-          <div className="occupation-detail-grid">
-            <div>
-              <h3>Top tasks</h3>
-              <ul>
-                {occupation.tasks.slice(0, 5).map((task) => <li key={task.id}>{task.text}</li>)}
-              </ul>
-            </div>
-            <div>
-              <h3>Preparation</h3>
-              <p>{preparationLabel(occupation)}</p>
-              <div className="chip-row">
-                {[...occupation.skills.essential, ...occupation.skills.transferable].slice(0, 8).map((skill) => (
-                  <span className="chip" key={`${skill.type}-${skill.id}`}>{skill.name}</span>
-                ))}
+        {showOccupationDetail && (
+          <div className="occupation-detail-panel">
+            <div className="occupation-detail-grid">
+              <div>
+                <h3>Top tasks</h3>
+                <ul>
+                  {occupation.tasks.slice(0, 5).map((task) => <li key={task.id}>{task.text}</li>)}
+                </ul>
+              </div>
+              <div>
+                <h3>Preparation</h3>
+                <p>{preparationLabel(occupation)}</p>
+                <div className="chip-row">
+                  {[...occupation.skills.essential, ...occupation.skills.transferable].slice(0, 8).map((skill) => (
+                    <span className="chip" key={`${skill.type}-${skill.id}`}>{skill.name}</span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </details>
+        )}
       </section>
 
       <CausalConnector
-        label="AI exposure is the baseline; institutions mediate what happens next"
+        label="AI exposure sets the baseline. Institutional arrangements shape what happens next"
         pulseKey={`baseline-to-institution-${occupation.onet_soc_code}`}
         showPulse={false}
       />
@@ -1492,8 +2975,8 @@ function App() {
         <div className="stage-number">1</div>
         <div className="stage-heading">
           <p className="eyebrow">Institutional environment</p>
-          <h2>What institutional environment is shaping the transition?</h2>
-          <p>Start with an institutional arrangement, then explore how its components work together.</p>
+          <h2>How could institutional arrangements shape what happens next?</h2>
+          <p>Choose an institutional arrangement to explore how different systems manage technological change.</p>
         </div>
 
         <div className="preset-rail" aria-label="Institutional starting configurations">
@@ -1529,16 +3012,7 @@ function App() {
         </button>
 
         {showInstitutionDetails && (
-          <div className="dimension-list">
-            {institutionalControls.map((control) => (
-              <DimensionSlider
-                key={control.field}
-                control={control}
-                value={String(institutionalValues[control.field])}
-                onChange={(value) => updateInstitutionalOverride(control.field, value)}
-              />
-            ))}
-          </div>
+          <InstitutionalDetails values={institutionalValues} onChange={updateInstitutionalOverride} />
         )}
 
         <div className="comparative-cases-disclosure">
@@ -1569,7 +3043,7 @@ function App() {
         pulseKey={`institution-to-organization-${scenarioSignature}`}
       />
 
-      <section className="stage-section organization-section">
+      <section ref={organizationSectionRef} className="stage-section organization-section">
         <div className="stage-number">2</div>
         <div className="stage-heading">
           <p className="eyebrow">Organizational response</p>
@@ -1577,33 +3051,51 @@ function App() {
           <p>Choose how the employer deploys AI, invests in workers, and shares decisions.</p>
         </div>
 
-        <div className="strategy-selector">
-          {organizationalPresets.map((preset) => (
-            <button
-              type="button"
-              key={preset.id}
-              className={preset.id === organizationPresetId ? "selected" : ""}
-              onClick={() => selectOrganizationPreset(preset)}
-            >
-              <strong>{preset.label}</strong>
-              <span>{preset.summary}</span>
-              {preset.id === organizationPresetId && (
-                <small className="strategy-context">
-                  <span className="strategy-context-label">Under the current institutional environment:</span>
-                  <span className="strategy-context-copy">{organizationalEnvironmentNote(preset.id, institutionalValues)}</span>
-                </small>
-              )}
-            </button>
-          ))}
+        <div className="response-meter" aria-label="Organizational response starting configurations">
+          <div className="strategy-selector response-meter-options">
+            {organizationalPresets.map((preset) => {
+              const context = organizationalContextCue(preset.id, institutionalValues);
+              return (
+                <button
+                  type="button"
+                  key={preset.id}
+                  className={`organization-response-card${preset.id === closestOrganizationResponse.id ? " selected" : ""}`}
+                  aria-label={`${preset.label}: ${preset.summary}. Under the current institutional environment: ${context.label}. ${context.explanation}`}
+                  onClick={() => selectOrganizationPreset(preset)}
+                >
+                  <span className="organization-response-title-row">
+                    <strong>{preset.label}</strong>
+                    <span
+                      key={`${preset.id}-${context.level}`}
+                      className={`strategy-context-cue is-${context.level}`}
+                      aria-hidden="true"
+                    >
+                      <span className="strategy-context-icon">{context.arrow}</span>
+                      <span className="strategy-context-popover">
+                        <span className="strategy-context-kicker">Under the current institutional environment</span>
+                        <span className="strategy-context-label">{context.label}</span>
+                        <span className="strategy-context-copy">{context.explanation}</span>
+                      </span>
+                    </span>
+                  </span>
+                  <span>{preset.summary}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="organization-decision-board">
-          {organizationControls.slice(0, 3).map((control) => (
+        <div
+          className={`organization-decision-board${organizationInView ? " is-revealed" : ""}`}
+          key={`organization-decisions-${organizationPresetId}`}
+        >
+          {organizationControls.slice(0, 3).map((control, index) => (
             <OrganizationDecisionTrack
-              key={control.field}
+              key={`${control.field}-${organizationPresetId}`}
               control={control}
               occupation={occupation}
               value={String(organizationalValues[control.field])}
+              revealIndex={index}
               onChange={(value) =>
                 setOrganizationalOverrides((current) => ({ ...current, [control.field]: value }))
               }
@@ -1618,21 +3110,28 @@ function App() {
           aria-expanded={showOrganizationDetails}
         >
           <SlidersHorizontal size={17} />
-          {showOrganizationDetails ? "Hide additional organizational assumptions" : "See additional organizational assumptions"}
+          {showOrganizationDetails ? "Hide additional organizational choices" : "More organizational choices"}
         </button>
 
         {showOrganizationDetails && (
-          <div className="dimension-list organization-dimensions">
-            {organizationControls.slice(3).map((control) => (
-              <DimensionSlider
-                key={control.field}
-                control={control}
-                value={String(organizationalValues[control.field])}
-                onChange={(value) =>
-                  setOrganizationalOverrides((current) => ({ ...current, [control.field]: value }))
-                }
-              />
-            ))}
+          <div className="organization-assumption-list">
+            <p className="organization-assumption-note">
+              These contextual assumptions refine the organizational scenario; their downstream effects are not modeled uniformly.
+            </p>
+            {additionalOrganizationFields.map((field) => {
+              const control = organizationControls.find((item) => item.field === field);
+              if (!control) return null;
+              return (
+                <OrganizationAssumptionItem
+                  key={field}
+                  control={control}
+                  value={String(organizationalValues[field])}
+                  onChange={(value) =>
+                    setOrganizationalOverrides((current) => ({ ...current, [field]: value }))
+                  }
+                />
+              );
+            })}
           </div>
         )}
       </section>
@@ -1672,23 +3171,11 @@ function App() {
           <p className="eyebrow">Labor outcome tendencies</p>
           <h2>Outcomes move in different directions.</h2>
           <p>
-            Productivity, employment, job quality, skill formation, and displacement can move in different directions — they are not a single score.
+            Your earlier choices create competing pressures across these outcomes.
           </p>
         </div>
 
-        <div className="outcome-method-note">
-          <p>
-            <strong>This divergence is intentional, not a glitch.</strong>{" "}
-            A scenario can increase productivity potential while also increasing displacement pressure or weakening skill
-            formation. Positions below are evidence-informed qualitative tendencies synthesized from matched rules, not measured forecasts.
-          </p>
-        </div>
-
-        <div className="outcomes-list">
-          {result.outcomes.map((outcome) => (
-            <OutcomeMovement key={outcome.dimension} outcome={outcome} />
-          ))}
-        </div>
+        <OutcomesExplorer key={scenarioSignature} result={result} />
       </section>
 
       <CausalConnector

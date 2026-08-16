@@ -15,6 +15,7 @@ Job Zones.csv
 Job Zone Reference.csv
 Scales Reference.csv
 Task Categories.csv
+Job Titles.csv
 ```
 
 ## What Each File Provides
@@ -30,6 +31,7 @@ Job Zones.csv             -> job zone number by occupation
 Job Zone Reference.csv    -> job zone meanings and training/education descriptions
 Scales Reference.csv      -> meanings of rating scales
 Task Categories.csv       -> meanings of task frequency categories
+Job Titles.csv            -> official alternate and lay job titles used for occupation search aliases; stored locally as job_titles.csv
 ```
 
 All these files connect through `O*NET-SOC Code`.
