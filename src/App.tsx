@@ -1058,7 +1058,9 @@ function polarPoint(cx: number, cy: number, radius: number, angleDegrees: number
 }
 
 function wrapSvgLabel(label: string): string[] {
+  if (label.includes("-")) return label.split("-").map((part, index) => index === 0 ? `${part}-` : part);
   const words = label.split(" ");
+  if (words.length === 2 && label.length > 14) return words;
   if (words.length <= 2) return [label];
   const midpoint = Math.ceil(words.length / 2);
   return [words.slice(0, midpoint).join(" "), words.slice(midpoint).join(" ")];
@@ -1093,20 +1095,18 @@ function InstitutionShape({ values }: { values: Record<string, string | boolean>
           const angle = (360 / institutionalControls.length) * index;
           const end = polarPoint(center, center, outerRadius, angle);
           const labelPoint = polarPoint(center, center, labelRadius, angle);
+          const labelX = Math.max(110, Math.min(size - 110, labelPoint.x));
           const lines = wrapSvgLabel(control.shortLabel ?? control.label);
           const anchor = labelPoint.x < center - 25 ? "end" : labelPoint.x > center + 25 ? "start" : "middle";
           return (
             <g key={control.field}>
               <line className="shape-axis" x1={center} y1={center} x2={end.x} y2={end.y} />
-              <text className="shape-label" x={labelPoint.x} y={labelPoint.y} textAnchor={anchor}>
+              <text className="shape-label" x={labelX} y={labelPoint.y} textAnchor={anchor}>
                 {lines.map((line, lineIndex) => (
-                  <tspan key={line} x={labelPoint.x} dy={lineIndex === 0 ? 0 : 13}>
+                  <tspan key={line} x={labelX} dy={lineIndex === 0 ? 0 : 13}>
                     {line}
                   </tspan>
                 ))}
-              </text>
-              <text className="shape-index" x={labelPoint.x} y={labelPoint.y} textAnchor="middle" dominantBaseline="middle">
-                {index + 1}
               </text>
             </g>
           );
@@ -1123,15 +1123,6 @@ function InstitutionShape({ values }: { values: Record<string, string | boolean>
         ))}
         <circle className="shape-core" cx={center} cy={center} r={11} />
       </svg>
-      <ol className="shape-mobile-key" aria-label="Institutional dimensions">
-        {institutionalControls.map((control, index) => (
-          <li key={control.field}>
-            <span className="shape-key-number">{index + 1}</span>
-            <span className="shape-key-label">{control.shortLabel ?? control.label}</span>
-            <strong>{formatInstitutionLevel(String(values[control.field]))}</strong>
-          </li>
-        ))}
-      </ol>
       <p className="shape-caption">The shape shows the configuration across institutional dimensions. Larger does not mean “better”; it means a stronger or more intensive setting on that dimension.</p>
     </div>
   );
