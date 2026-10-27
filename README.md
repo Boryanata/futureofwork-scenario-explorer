@@ -30,6 +30,8 @@ Users can:
 6. save one scenario and compare it with another pathway under the same technological exposure;
 7. optionally compare the user's institutional arrangement with stylized reference cases.
 
+The **About the Framework** tab presents the companion essay and links to the full white paper.
+
 ## Institutional arrangements
 
 The explorer treats institutional arrangements as configurations rather than single policies or organizations. The active scenario combines dimensions such as:
@@ -79,8 +81,8 @@ Outcome positions are **evidence-informed qualitative tendencies synthesized fro
 The current interactive app uses:
 
 - **O*NET** occupational, task, and skill data;
-- **OECD** AI-exposure data;
-- the **Anthropic Economic Index**.
+- **AIOE** occupational AI-exposure data;
+- **OECD** AI-exposure data.
 
 These quantitative inputs establish the occupational and technological baseline used by the explorer.
 

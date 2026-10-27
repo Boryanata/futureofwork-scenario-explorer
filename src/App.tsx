@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   BookOpen,
   BriefcaseBusiness,
@@ -22,6 +22,7 @@ import {
 } from "./data/appData";
 import { evaluateScenario } from "./domain/scenarioEngine";
 import { formatOutcomeLabel } from "./domain/explanations";
+import FrameworkArticle from "./FrameworkArticle";
 import type {
   OutcomeDimension,
   OutcomeResult,
@@ -1104,6 +1105,9 @@ function InstitutionShape({ values }: { values: Record<string, string | boolean>
                   </tspan>
                 ))}
               </text>
+              <text className="shape-index" x={labelPoint.x} y={labelPoint.y} textAnchor="middle" dominantBaseline="middle">
+                {index + 1}
+              </text>
             </g>
           );
         })}
@@ -1119,6 +1123,15 @@ function InstitutionShape({ values }: { values: Record<string, string | boolean>
         ))}
         <circle className="shape-core" cx={center} cy={center} r={11} />
       </svg>
+      <ol className="shape-mobile-key" aria-label="Institutional dimensions">
+        {institutionalControls.map((control, index) => (
+          <li key={control.field}>
+            <span className="shape-key-number">{index + 1}</span>
+            <span className="shape-key-label">{control.shortLabel ?? control.label}</span>
+            <strong>{formatInstitutionLevel(String(values[control.field]))}</strong>
+          </li>
+        ))}
+      </ol>
       <p className="shape-caption">The shape shows the configuration across institutional dimensions. Larger does not mean “better”; it means a stronger or more intensive setting on that dimension.</p>
     </div>
   );
@@ -2507,6 +2520,14 @@ function ComparePanel({
 }
 
 function App() {
+  const [activeTab, setActiveTab] = useState<"explorer" | "framework">("explorer");
+  const returnToExplorerTop = useRef(false);
+  useLayoutEffect(() => {
+    if (activeTab !== "explorer" || !returnToExplorerTop.current) return;
+    returnToExplorerTop.current = false;
+    document.getElementById("explorer-tab")?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [activeTab]);
   const defaultOccupation = findOccupation("Customer Service Representatives");
   const [occupationCode, setOccupationCode] = useState(defaultOccupation.onet_soc_code);
   const [query, setQuery] = useState("");
@@ -2702,6 +2723,41 @@ function App() {
 
   return (
     <main className="app-shell">
+      <nav className="app-tabs" role="tablist" aria-label="Project sections" onKeyDown={(event) => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const nextTab = event.key === "Home"
+          ? "explorer"
+          : event.key === "End"
+            ? "framework"
+            : activeTab === "explorer" ? "framework" : "explorer";
+        setActiveTab(nextTab);
+        document.getElementById(`${nextTab}-tab`)?.focus();
+      }}>
+        <button
+          id="explorer-tab"
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "explorer"}
+          aria-controls="explorer-panel"
+          tabIndex={activeTab === "explorer" ? 0 : -1}
+          onClick={() => setActiveTab("explorer")}
+        >
+          Scenario Explorer
+        </button>
+        <button
+          id="framework-tab"
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "framework"}
+          aria-controls="framework-panel"
+          tabIndex={activeTab === "framework" ? 0 : -1}
+          onClick={() => setActiveTab("framework")}
+        >
+          About the Framework
+        </button>
+      </nav>
+      <div id="explorer-panel" role="tabpanel" aria-labelledby="explorer-tab" tabIndex={0} hidden={activeTab !== "explorer"}>
       <header className="hero">
         <p className="eyebrow">Institutional Scenario Explorer for AI & Labor Futures</p>
         <h1>
@@ -3255,10 +3311,17 @@ function App() {
 
       <footer className="method-footer">
         <strong>Data foundation:</strong> The explorer uses O*NET occupational, task, and skill data together with AI-exposure data
-        from OECD and the Anthropic Economic Index to establish the occupational and technological baseline. Academic and policy
+        from AIOE and OECD to establish the occupational and technological baseline. Academic and policy
         evidence separately informs the scenario logic linking institutional arrangements and organizational choices to labor-market
         tendencies. Outputs are directional explorations, not predictions of individual job outcomes.
       </footer>
+      </div>
+      <div id="framework-panel" role="tabpanel" aria-labelledby="framework-tab" tabIndex={0} hidden={activeTab !== "framework"}>
+        <FrameworkArticle onExplore={() => {
+          returnToExplorerTop.current = true;
+          setActiveTab("explorer");
+        }} />
+      </div>
     </main>
   );
 }
