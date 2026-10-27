@@ -1058,7 +1058,9 @@ function polarPoint(cx: number, cy: number, radius: number, angleDegrees: number
 }
 
 function wrapSvgLabel(label: string): string[] {
+  if (label.includes("-")) return label.split("-").map((part, index) => index === 0 ? `${part}-` : part);
   const words = label.split(" ");
+  if (words.length === 2 && label.length > 14) return words;
   if (words.length <= 2) return [label];
   const midpoint = Math.ceil(words.length / 2);
   return [words.slice(0, midpoint).join(" "), words.slice(midpoint).join(" ")];
