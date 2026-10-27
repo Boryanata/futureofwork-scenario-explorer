@@ -2022,11 +2022,7 @@ select {
   }
 
   .shape-label {
-    font-size: 14px;
-  }
-
-  .shape-caption {
-    margin-top: -8px;
+    font-size: 10px;
   }
 
   .compare-panel {
